@@ -1,5 +1,4 @@
 const Express = require("express");
-const schema = require('mongoose').Schema;
 const ExpressGraphQL = require("express-graphql").graphqlHTTP;
 const mongoose = require("mongoose");
 const {
@@ -16,14 +15,20 @@ const {
 
 var app = Express();
 var cors = require("cors");
+app.use(cors());
+/*
+    {
 
-mongoose
-.connect("mongodb://admin:gruppe14@it2810-14.idi.ntnu.no:27017/project3", {
-    auth: {
-        user: "admin",
-        password: "gruppe14"
+          username: "admin",
+          password: "gruppe14"
     }
-})
+}
+*/
+//her får vi ikke koblet til project 3, kun inn i generell database
+//prøvd på mange ulike måter men ingen gir riktig forbindelse
+//SPØR 
+mongoose
+.connect("mongodb://admin:gruppe14@it2810-14.idi.ntnu.no:27017/project3?authSource=admin")
 .then(() => console.log("Connected to database.."))
 .catch(err => console.error(err));
 
@@ -34,7 +39,7 @@ const SongModel = mongoose.model("song", {
     durationMS: Number,
     year: Number,
     energy: Number
-})
+});
 
 const SongType = new GraphQLObjectType({
     name: "Song",
@@ -49,8 +54,34 @@ const SongType = new GraphQLObjectType({
     }
 })
 
+const schema = new GraphQLSchema({
+	query: new GraphQLObjectType({
+		name: "Query",
+		fields: {
+			// alle mulige sanger
+            songs : {
+                type: GraphQLList(SongType),
+                resolve: (root, args, context, info) => {
+                    return SongModel.find().exec();
+                }
+            },
+            // sanger basert på artistnavn
+            songsByArtistName: {
+				type: GraphQLList(SongType),
+				args: { 
+					artistName: { type: GraphQLString } 
+				},
+				resolve: (root, args, context, info) => {
+					return SongModel.find({'artistName':args.artistName}).exec();
+				}
+			}
+		}
+	})
+})
+
+
 app.use("/song", ExpressGraphQL({
-        schema,
+        schema : schema,
         graphiql: true
     })
 );
