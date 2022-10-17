@@ -30,9 +30,9 @@ app.use(cors());
 //prøvd på mange ulike måter men ingen gir riktig forbindelse
 console.log("Starting...")
 mongoose
-.connect("mongodb://it2810-14.idi.ntnu.no:27017/project3")
-.then(() => console.log("Connected to database.."))
-.catch(err => console.error(err));
+    .connect("mongodb://it2810-14.idi.ntnu.no:27017/project3")
+    .then(() => console.log("Connected to database.."))
+    .catch(err => console.error(err));
 
 
 const SongModel = mongoose.model("song", mongoose.Schema({
@@ -42,7 +42,7 @@ const SongModel = mongoose.model("song", mongoose.Schema({
     durationMS: Number,
     year: Number,
     energy: Number
-}, {collection: "Music",}));
+}, { collection: "Music" }));
 
 const SongType = new GraphQLObjectType({
     name: "Song",
@@ -58,11 +58,11 @@ const SongType = new GraphQLObjectType({
 })
 
 const schema = new GraphQLSchema({
-	query: new GraphQLObjectType({
-		name: "Query",
-		fields: {
-			// alle mulige sanger
-            song : {
+    query: new GraphQLObjectType({
+        name: "Query",
+        fields: {
+            // alle mulige sanger
+            song: {
                 type: GraphQLList(SongType),
                 resolve: (root, args, context, info) => {
                     return SongModel.find().exec();
@@ -70,23 +70,23 @@ const schema = new GraphQLSchema({
             },
             // sanger basert på artistnavn
             songsByArtistName: {
-				type: GraphQLList(SongType),
-				args: { 
-					artistName: { type: GraphQLString } 
-				},
-				resolve: (root, args, context, info) => {
-					return SongModel.find({'artistName':args.artistName}).exec();
-				}
-			}
-		}
-	})
+                type: GraphQLList(SongType),
+                args: {
+                    artistName: { type: GraphQLString }
+                },
+                resolve: (root, args, context, info) => {
+                    return SongModel.find({ 'artistName': args.artistName }).exec();
+                }
+            }
+        }
+    })
 })
 
 
 app.use("/songs", ExpressGraphQL({
-        schema : schema,
-        graphiql: true
-    })
+    schema: schema,
+    graphiql: true
+})
 );
 
 app.listen(3001, () => {
