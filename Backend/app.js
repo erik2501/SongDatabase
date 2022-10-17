@@ -1,6 +1,7 @@
 const Express = require("express");
 const ExpressGraphQL = require("express-graphql").graphqlHTTP;
 const mongoose = require("mongoose");
+
 const {
     GraphQLID,
     GraphQLString,
@@ -21,25 +22,27 @@ app.use(cors());
 
           username: "admin",
           password: "gruppe14"
+          dbName:#project3"
     }
 }
 */
 //her får vi ikke koblet til project 3, kun inn i generell database
 //prøvd på mange ulike måter men ingen gir riktig forbindelse
-//SPØR 
+console.log("Starting...")
 mongoose
-.connect("mongodb://admin:gruppe14@it2810-14.idi.ntnu.no:27017/project3?authSource=admin")
+.connect("mongodb://it2810-14.idi.ntnu.no:27017/project3")
 .then(() => console.log("Connected to database.."))
 .catch(err => console.error(err));
 
-const SongModel = mongoose.model("song", {
+
+const SongModel = mongoose.model("song", mongoose.Schema({
     songID: Number,
     artistName: String,
     songName: String,
     durationMS: Number,
     year: Number,
     energy: Number
-});
+}, {collection: "Music",}));
 
 const SongType = new GraphQLObjectType({
     name: "Song",
@@ -51,7 +54,7 @@ const SongType = new GraphQLObjectType({
         durationMS: { type: GraphQLInt },
         year: { type: GraphQLInt },
         energy: { type: GraphQLFloat }
-    }
+    },
 })
 
 const schema = new GraphQLSchema({
@@ -59,7 +62,7 @@ const schema = new GraphQLSchema({
 		name: "Query",
 		fields: {
 			// alle mulige sanger
-            songs : {
+            song : {
                 type: GraphQLList(SongType),
                 resolve: (root, args, context, info) => {
                     return SongModel.find().exec();
@@ -80,7 +83,7 @@ const schema = new GraphQLSchema({
 })
 
 
-app.use("/song", ExpressGraphQL({
+app.use("/songs", ExpressGraphQL({
         schema : schema,
         graphiql: true
     })
