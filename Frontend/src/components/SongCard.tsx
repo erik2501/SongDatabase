@@ -6,7 +6,7 @@ const SongCard = ({song}: {song: Song}) => {
 
     const nav = useNavigate();
     const updateNav = () => {
-        nav('/song:' + song.songID);
+        nav('/song/' + song.songID);
     };
 
 

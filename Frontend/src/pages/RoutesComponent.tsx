@@ -7,8 +7,8 @@ const RoutesComponent = () => (
 	<ReactRouterRoutes>
 		<Route path="/" element={<RootLayout />}>
 			<Route index element={<HomePage />} />
-			<Route path="song">
-				<Route path=":songID" element={<SongPage />} />
+			<Route path="/song">
+				<Route path="/song/:songID" element={<SongPage />} />
 			</Route>
 		</Route>
 	</ReactRouterRoutes>

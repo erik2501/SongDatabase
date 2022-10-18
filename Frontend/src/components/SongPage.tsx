@@ -4,7 +4,7 @@ import SongDetails from './SongDetails';
 
 const SongPage = () => { // {songID}: {songID: number}
 
-    const { songID } = useParams<"songID">();
+    const { songID } = useParams<string>();
 	const songIDInt = parseInt(songID ?? "");
 
     if (isNaN(songIDInt)) {
