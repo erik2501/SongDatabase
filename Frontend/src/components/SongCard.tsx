@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 const SongCard = ({song}: {song: Song}) => {
 
-
     const nav = useNavigate();
     const updateNav = () => {
         nav('/song/' + song.songID);
     };
-
 
     return(
         <div>
