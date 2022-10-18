@@ -1,38 +1,40 @@
 .App {
   text-align: center;
+  color: gray;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  background-color: rgb(194, 238, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h2 {
+  margin: 0px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.songCard {
+  width: 70%;
+  height: 100px;
+  padding-left: 20px;
+  text-align: left;
+  border: none;
+  border-radius: 25px;
+  background-color: rgb(224, 224, 224);
+  cursor: pointer;
+  margin: 20px;
+  font-size: larger;
+  color: gray;
+}
+
+.songCard:hover {
+  opacity: 0.4;
+}
+
+#flexColCenter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
