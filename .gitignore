@@ -2,10 +2,14 @@
 
 # dependencies
 <<<<<<< HEAD
+<<<<<<< HEAD
 node_modules
 =======
 */node_modules
 >>>>>>> 7617c29f (updated gitignore)
+=======
+node_modules
+>>>>>>> f158e4ab (Update gitignore)
 /.pnp
 .pnp.js
 
