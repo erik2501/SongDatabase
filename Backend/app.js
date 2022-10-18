@@ -77,6 +77,15 @@ const schema = new GraphQLSchema({
                 resolve: (root, args, context, info) => {
                     return SongModel.find({ 'artistName': args.artistName }).exec();
                 }
+            },
+            songBySongID: {
+                type: GraphQLList(SongType),
+                args: {
+                    songID: { type: GraphQLInt }
+                },
+                resolve: (root, args, context, info) => {
+                    return SongModel.find({ 'songID': args.songID }).exec();
+                }
             }
         }
     })
