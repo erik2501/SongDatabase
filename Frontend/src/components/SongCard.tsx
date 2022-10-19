@@ -4,18 +4,14 @@ import { useNavigate } from 'react-router-dom';
 const SongCard = ({song}: {song: Song}) => {
 
     const nav = useNavigate();
-    const updateNav = () => {
-        nav('/song/' + song.songID);
-    };
 
     return(
-        <div>
-            <button className='songCard' onClick={() => updateNav()}>
+        <div className='songCardContainer'>
+            <button className='songCard' onClick={() => nav('/song/' + song.songID)}>
                 <p>{'Song: ' + song.songName}</p>
                 <p>{'Artist: ' + song.artistName}</p>
             </button>
         </div>
-        
     )
 }
 
