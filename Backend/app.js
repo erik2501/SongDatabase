@@ -68,6 +68,17 @@ const schema = new GraphQLSchema({
                     return SongModel.find().exec();
                 }
             },
+            songs_paginated: {
+                type: GraphQLList(SongType),
+                args: {
+                    skip: {type: GraphQLInt}, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
+                    amount: { type: GraphQLInt}
+                },
+                resolve: (root, args, context, info) => {
+                    return SongModel.find().skip(args.skip).limit(args.amount).exec()
+                }
+            },
+
             // sanger basert på artistnavn
             songsByArtistName: {
                 type: GraphQLList(SongType),

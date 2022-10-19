@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
-import SongDetails from './SongDetails';
+import SongDetails from '../components/SongDetails';
 import { useNavigate } from 'react-router-dom';
+import ErrorPage from "./ErrorPage";
 
 
 const SongPage = () => { // {songID}: {songID: number}
@@ -14,10 +15,8 @@ const SongPage = () => { // {songID}: {songID: number}
 	if (isNaN(songIDInt)) {
 		return (
 			<div>
-				<button onClick={() => nav('/')}>Back to songsearch</button>
-				<h1>It seems the url has been altered.<br></br>Make sure what comes after '/song/' is a number.</h1>
+				<ErrorPage message="It seems the url has been altered. Make sure what comes after '/song/' is a number."/>
 			</div>
-			
 		)
 	}
 
