@@ -1,6 +1,7 @@
 const Express = require("express");
 const ExpressGraphQL = require("express-graphql").graphqlHTTP;
 const mongoose = require("mongoose");
+// const { SongModel, ReviewModel } = require('./Schemas')
 
 const {
     GraphQLID,
@@ -17,32 +18,48 @@ const {
 var app = Express();
 var cors = require("cors");
 app.use(cors());
-/*
-    {
 
-          username: "admin",
-          password: "gruppe14"
-          dbName:#project3"
-    }
-}
-*/
-//her får vi ikke koblet til project 3, kun inn i generell database
-//prøvd på mange ulike måter men ingen gir riktig forbindelse
 console.log("Starting...")
 mongoose
     .connect("mongodb://it2810-14.idi.ntnu.no:27017/project3")
     .then(() => console.log("Connected to database.."))
     .catch(err => console.error(err));
 
-
-const SongModel = mongoose.model("song", mongoose.Schema({
+const songSchema = new mongoose.Schema({
     songID: Number,
     artistName: String,
     songName: String,
     durationMS: Number,
     year: Number,
     energy: Number
-}, { collection: "Music" }));
+}, { collection: "Music" });
+
+const reviewSchema = new mongoose.Schema({
+    userName: {
+        type: String,
+        required: true,
+        immutable: true
+    },
+    star: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5
+    },
+    reviewDescription: String,
+    song: {
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true,
+        immutable: true,
+        // validate: {
+        //     validator: v => v
+        // } sjekk at v finnes i songs?
+    },
+})
+
+const SongModel = mongoose.model("song", songSchema);
+
+const ReviewModel = mongoose.model('review', reviewSchema);
 
 const SongType = new GraphQLObjectType({
     name: "Song",
@@ -55,6 +72,17 @@ const SongType = new GraphQLObjectType({
         year: { type: GraphQLInt },
         energy: { type: GraphQLFloat }
     },
+})
+
+const ReviewType = new GraphQLObjectType({
+    name: 'review',
+    fields: {
+        _id: { type: GraphQLID },
+        reviewID: { type: GraphQLInt },
+        userName: { type: GraphQLString },
+        star: { type: GraphQLInt },
+        reviewDescription: { type: GraphQLString }
+    }
 })
 
 const schema = new GraphQLSchema({
@@ -71,8 +99,8 @@ const schema = new GraphQLSchema({
             songs_paginated: {
                 type: GraphQLList(SongType),
                 args: {
-                    skip: {type: GraphQLInt}, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
-                    amount: { type: GraphQLInt}
+                    skip: { type: GraphQLInt }, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
+                    amount: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
                     return SongModel.find().skip(args.skip).limit(args.amount).exec()
@@ -112,3 +140,10 @@ app.use("/songs", ExpressGraphQL({
 app.listen(3001, () => {
     console.log("server running at 3001");
 });
+
+async function run() {
+    const rev = new ReviewModel({ userName: 'cat', star: 5, reviewDescription: 'bra', song: '6345556c61d7bda047cb5196' })
+    await rev.save()
+    console.log(rev)
+}
+// run()
