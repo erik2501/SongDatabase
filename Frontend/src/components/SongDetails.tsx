@@ -11,6 +11,7 @@ const GET_SONG_BY_SONGID = gql`
             durationMS
             year
             energy
+            imageURL
         }
     }
 `;
@@ -26,21 +27,20 @@ const SongDetails= ({songID}: {songID: number}) => {
         }
     },[data])
 
-    if (loading) {
-        return (
-            <h1>'Loading...'</h1>
-        )
-    }
+    if (loading) return <h1>Loading...</h1>
     if (error) return <h1>`Error! ${error.message}`</h1>;
     if (!song) return <h1>Could not find this song.</h1>
 
     return (
-        <div>
-            <h1>Song: {song?.songName} </h1>
-            <p>Artist: {song?.artistName}</p>
-            <p>Year: {song?.year}</p>
-            <p>Duration: {song?.durationMS}</p>
-            <p>Energy: {song?.energy}</p>
+        <div className='songDetails'>
+            <img className='imgDetails' src={song.imageURL}></img>
+            <div className='textbox'>
+                <h1>{song?.songName} </h1>
+                <p>Artist: {song?.artistName}</p>
+                <p>Year: {song?.year}</p>
+                <p>Duration: {song?.durationMS}</p>
+                <p>Energy: {song?.energy}</p>
+            </div>
         </div>
     )
 }

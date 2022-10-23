@@ -11,7 +11,7 @@ header {
   height: 60px;
 }
 
-h2, p {
+h1, h2, p {
   margin: 0px;
 }
 
@@ -64,24 +64,30 @@ select{
   font-size: medium;
 }
 
-
-.songCardContainer {
-  width: 70%;
+.textbox {
+  padding-left: 20px;
+  text-align: left;
+  font-size: larger;
+  color: gray;
 }
 
 .songCard {
   height: 100px;
   width: 100%;
-  padding-left: 20px;
-  text-align: left;
-  border: none;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
   border-radius: 25px;
   background-color: rgb(224, 224, 224);
   cursor: pointer;
-  font-size: larger;
-  color: gray;
   transition: 0.1s;
-  margin-bottom: 30px;
+}
+
+.songCardContainer{
+  width: 70%;
+  display: flex;
+  justify-content: center;
 }
 
 .songCard:hover {
@@ -106,4 +112,19 @@ select{
 
 .searchbar {
   margin-bottom: 20px;
+}
+
+.albumcoverImage {
+  height: 100px;
+}
+
+.songDetails {
+  width: 70%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: space-between;
+}
+
+.imgDetails{
+  height: 300px;
 }

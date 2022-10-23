@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 interface SearchWordProps {
+    setOffset: Dispatch<SetStateAction<number>>;
     searchWord: string;
     setSearchWord: Dispatch<SetStateAction<string>>;
     filter: string;
@@ -8,14 +9,17 @@ interface SearchWordProps {
 }
 
 
-const Searchbar = ({searchWord, setSearchWord, filter, setFilter}: SearchWordProps) => {
+const Searchbar = ({ setOffset, searchWord, setSearchWord, filter, setFilter }: SearchWordProps) => {
 
     const handleSearch = (value: string) => {
         setSearchWord(value);
+        console.log('setter offset til 0')
+        setOffset(0);
     } 
 
     const changeFilter = (value: string) => {
         setFilter(value)
+        setOffset(0);
     }
 
     return (

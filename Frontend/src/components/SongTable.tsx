@@ -10,6 +10,7 @@ const GET_SEARCH = gql`
             songID
             artistName
             songName
+            imageURL
         }
     }
 `;
@@ -32,17 +33,21 @@ const SongTable = ({PAGE_SIZE, offset, searchWord, filter }: IProps) => {
         }
     },[data])
 
+
+
     if (error) return <ErrorPage message={`Error! ${error.message}`}/>;
 
     return (
         <div className="flexColCenterCenter">
-            {/* {loading ? 'Loading..' : ''} */}
-            {(songs.length === 0) ? 'No songs were found.' : 
+            {loading ? 'Loading..' : ''}
+            {(songs.length === 0 && !loading) ? 'No songs were found.' : 
             songs.map( (song, index) => {
                 return(
                     <SongCard key={index} song={song}/>
                 )
             })}
+
+            {loading ? 'Loading..' : ''}
         </div>
     )
 }

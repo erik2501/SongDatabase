@@ -41,8 +41,9 @@ const SongModel = mongoose.model("song", mongoose.Schema({
     songName: String,
     durationMS: Number,
     year: Number,
-    energy: Number
-}, { collection: "Music" }));
+    energy: Number,
+    imageURL: String
+}, { collection: "songs" }));
 
 const SongType = new GraphQLObjectType({
     name: "Song",
@@ -53,7 +54,8 @@ const SongType = new GraphQLObjectType({
         songName: { type: GraphQLString },
         durationMS: { type: GraphQLInt },
         year: { type: GraphQLInt },
-        energy: { type: GraphQLFloat }
+        energy: { type: GraphQLFloat },
+        imageURL: { type: GraphQLString }
     },
 })
 
@@ -61,34 +63,6 @@ const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: "Query",
         fields: {
-            // alle mulige sanger
-            // song: {
-            //     type: GraphQLInt,
-            //     resolve: (root, args, context, info) => {
-            //         return 12;
-            //     }
-            // },
-            // songs_paginated: {
-            //     type: GraphQLList(SongType),
-            //     args: {
-            //         skip: {type: GraphQLInt}, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
-            //         amount: { type: GraphQLInt}
-            //     },
-            //     resolve: (root, args, context, info) => {
-            //         return SongModel.find().skip(args.skip).limit(args.amount).exec()
-            //     }
-            // },
-
-            // // sanger basert på artistnavn
-            // songsByArtistName: {
-            //     type: GraphQLList(SongType),
-            //     args: {
-            //         artistName: { type: GraphQLString }
-            //     },
-            //     resolve: (root, args, context, info) => {
-            //         return SongModel.find({ 'artistName': args.artistName }).exec();
-            //     }
-            // },
             songBySongID: {
                 type: GraphQLList(SongType),
                 args: {
