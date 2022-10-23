@@ -21,7 +21,7 @@ const SongPage = () => { // {songID}: {songID: number}
 	}
 
 	return (
-		<div className="songPage">
+		<div className="flexColCenterCenter">
 			<button onClick={() => nav('/')}>Back to songsearch</button>
 			<SongDetails songID={songIDInt} />
 		</div>

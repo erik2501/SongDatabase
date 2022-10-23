@@ -14,7 +14,6 @@ const HomePage = () => {
     useEffect(() => {
         sessionStorage.setItem('searchWord', searchWord);
         sessionStorage.setItem('filter', filter);
-        setOffset(0);
     },[searchWord,filter])
 
 
@@ -29,7 +28,7 @@ const HomePage = () => {
     return (
         <div className='flexColCenterCenter'>
 
-            <Searchbar searchWord={searchWord} setSearchWord={setSearchWord} filter={filter} setFilter={setFilter}/>
+            <Searchbar setOffset={setOffset} searchWord={searchWord} setSearchWord={setSearchWord} filter={filter} setFilter={setFilter}/>
             <SongTable PAGE_SIZE={PAGE_SIZE} offset={offset} searchWord={searchWord} filter={filter}/>
 
             <div className='page-manager'>
