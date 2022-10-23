@@ -62,33 +62,33 @@ const schema = new GraphQLSchema({
         name: "Query",
         fields: {
             // alle mulige sanger
-            song: {
-                type: GraphQLList(SongType),
-                resolve: (root, args, context, info) => {
-                    return SongModel.find().exec();
-                }
-            },
-            songs_paginated: {
-                type: GraphQLList(SongType),
-                args: {
-                    skip: {type: GraphQLInt}, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
-                    amount: { type: GraphQLInt}
-                },
-                resolve: (root, args, context, info) => {
-                    return SongModel.find().skip(args.skip).limit(args.amount).exec()
-                }
-            },
+            // song: {
+            //     type: GraphQLInt,
+            //     resolve: (root, args, context, info) => {
+            //         return 12;
+            //     }
+            // },
+            // songs_paginated: {
+            //     type: GraphQLList(SongType),
+            //     args: {
+            //         skip: {type: GraphQLInt}, // Står på nett at dette er CPU expensive og slow. Kan kanskje endre til å ha amount og en filter på '-createdOn'
+            //         amount: { type: GraphQLInt}
+            //     },
+            //     resolve: (root, args, context, info) => {
+            //         return SongModel.find().skip(args.skip).limit(args.amount).exec()
+            //     }
+            // },
 
-            // sanger basert på artistnavn
-            songsByArtistName: {
-                type: GraphQLList(SongType),
-                args: {
-                    artistName: { type: GraphQLString }
-                },
-                resolve: (root, args, context, info) => {
-                    return SongModel.find({ 'artistName': args.artistName }).exec();
-                }
-            },
+            // // sanger basert på artistnavn
+            // songsByArtistName: {
+            //     type: GraphQLList(SongType),
+            //     args: {
+            //         artistName: { type: GraphQLString }
+            //     },
+            //     resolve: (root, args, context, info) => {
+            //         return SongModel.find({ 'artistName': args.artistName }).exec();
+            //     }
+            // },
             songBySongID: {
                 type: GraphQLList(SongType),
                 args: {
@@ -96,6 +96,36 @@ const schema = new GraphQLSchema({
                 },
                 resolve: (root, args, context, info) => {
                     return SongModel.find({ 'songID': args.songID }).exec();
+                }
+            },
+            // songSearchLength: {
+            //     type: GraphQLInt,
+            //     args: {
+            //         filter: { type: GraphQLString },
+            //         searchWord: { type: GraphQLString }
+            //     },
+            //     resolve: (root, args, context, info) => {
+            //         return SongModel.find({ 'songName': { $regex: args.searchWord } }).length
+            //     }
+            // },
+            songSearch: {
+                type: GraphQLList(SongType),
+                args: {
+                    skip: {type: GraphQLInt},
+                    amount: { type: GraphQLInt},
+                    filter: { type: GraphQLString },
+                    searchWord: { type: GraphQLString }
+                },
+                resolve: (root, args, context, info) => {
+                    if (args.filter === 'Any') {
+                        return SongModel.find({ $or: [ {'songName': { $regex: args.searchWord }}, { 'artistName': { $regex: args.searchWord } }] }).skip(args.skip).limit(args.amount).exec()
+                    }
+                    else if (args.filter === 'Song'){
+                        return SongModel.find({ 'songName': { $regex: args.searchWord } }).skip(args.skip).limit(args.amount).exec()
+                    } 
+                    else {
+                        return SongModel.find({ 'artistName': { $regex: args.searchWord } }).skip(args.skip).limit(args.amount).exec()
+                    }
                 }
             }
         }
