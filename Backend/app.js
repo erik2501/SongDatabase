@@ -92,13 +92,13 @@ const schema = new GraphQLSchema({
                 },
                 resolve: (root, args, context, info) => {
                     if (args.filter === 'Any') {
-                        return SongModel.find({ $or: [ {'songName': { $regex: args.searchWord }}, { 'artistName': { $regex: args.searchWord } }] }).skip(args.skip).limit(args.amount).exec()
+                        return SongModel.find({ $or: [ {'songName': { $regex: args.searchWord }}, { 'artistName': { $regex: args.searchWord } }] }).sort({songID:-1}).skip(args.skip).limit(args.amount).exec()
                     }
                     else if (args.filter === 'Song'){
-                        return SongModel.find({ 'songName': { $regex: args.searchWord } }).skip(args.skip).limit(args.amount).exec()
+                        return SongModel.find({ 'songName': { $regex: args.searchWord } }).sort({songID:-1}).skip(args.skip).limit(args.amount).exec()
                     } 
                     else {
-                        return SongModel.find({ 'artistName': { $regex: args.searchWord } }).skip(args.skip).limit(args.amount).exec()
+                        return SongModel.find({ 'artistName': { $regex: args.searchWord } }).sort({songID:-1}).skip(args.skip).limit(args.amount).exec()
                     }
                 }
             }
