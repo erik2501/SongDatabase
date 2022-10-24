@@ -34,7 +34,7 @@ const songSchema = new mongoose.Schema({
     energy: Number,
     imageURL: String
 
-}, { collection: "Music" });
+}, { collection: "songs" });
 
 const reviewSchema = new mongoose.Schema({
     userName: {
