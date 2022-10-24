@@ -109,7 +109,7 @@ const schema = new GraphQLSchema({
                     searchWord: { type: GraphQLString }
                 },
                 resolve: (root, args, context, info) => {
-                    return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord } }, { 'artistName': { $regex: args.searchWord } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options' : 'i'  } }, { 'artistName': { $regex: args.searchWord, '$options' : 'i'  } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
                 }
             }
         }
