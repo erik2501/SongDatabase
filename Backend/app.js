@@ -101,6 +101,15 @@ const schema = new GraphQLSchema({
                     return SongModel.find({ 'songID': args.songID }).exec();
                 }
             },
+            songSearchCount: {
+                type: GraphQLInt,
+                args: {
+                    searchWord: { type: GraphQLString }
+                },
+                resolve: (root, args, context, info) => {
+                    return SongModel.countDocuments({ $or: [ {'songName': { $regex: args.searchWord, '$options' : 'i' }}, { 'artistName': { $regex: args.searchWord,  '$options' : 'i'} }] })
+                }
+            },
             songSearch: {
                 type: GraphQLList(SongType),
                 args: {

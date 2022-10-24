@@ -1,14 +1,26 @@
 import { useEffect, useState } from 'react';
 import Searchbar from '../components/Searchbar';
 import SongTable from '../components/SongTable';
+import { gql, useLazyQuery } from '@apollo/client';
+import { debounce } from '../helpers/utils';
 
 const PAGE_SIZE = 20;
+
+const GET_COUNT = gql`
+    query ( $searchWord: String ){
+        songSearchCount( searchWord: $searchWord )
+    }
+`;
+
+const debounceSearch = debounce((fetchFunc: () => void) => fetchFunc()) 
 
 const HomePage = () => {
 
     const offsetLS = parseInt(sessionStorage.getItem('offset') ?? '');
     const [offset, setOffset] = useState<number>(() => isNaN(offsetLS) ? 0 : offsetLS);
     const [searchWord, setSearchWord] = useState<string>(sessionStorage.getItem('searchWord') ?? '');
+
+    const [fetchCount, {loading, error, data}] = useLazyQuery(GET_COUNT)
 
     useEffect(() => {
         sessionStorage.setItem('searchWord', searchWord);
@@ -19,9 +31,14 @@ const HomePage = () => {
         sessionStorage.setItem('offset', offset.toString());
     },[offset])
 
+    useEffect(() => {
+        debounceSearch(() => fetchCount({ variables: { searchWord: searchWord } }))
+        
+    }, [searchWord])
+
 
     let pageNumber = offset/PAGE_SIZE + 1
-    const maxPages = Math.ceil(2000 / PAGE_SIZE); // have to get size of songs schema from database
+    const maxPages = Math.ceil((data?.songSearchCount ?? 1) / PAGE_SIZE);
 
     return (
         <div className='flexColCenterCenter'>
