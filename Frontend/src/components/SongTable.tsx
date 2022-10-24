@@ -5,8 +5,8 @@ import ErrorPage from "../pages/ErrorPage";
 import SongCard from "./SongCard";
 
 const GET_SEARCH = gql`
-    query Get_Search ($filter: String, $searchWord: String, $skip: Int, $amount:Int){
-        songSearch(skip: $skip, amount:$amount, filter: $filter, searchWord: $searchWord ) {
+    query Get_Search ($searchWord: String, $skip: Int, $amount:Int){
+        songSearch(skip: $skip, amount:$amount, searchWord: $searchWord ) {
             songID
             artistName
             songName
@@ -19,13 +19,12 @@ interface IProps {
     PAGE_SIZE: number;
     offset: number;
     searchWord: string;
-    filter: string;
 }
 
-const SongTable = ({PAGE_SIZE, offset, searchWord, filter }: IProps) => {
+const SongTable = ({PAGE_SIZE, offset, searchWord }: IProps) => {
 
     const [songs, setSongs] = useState<Song[]>([]);
-    const { loading, error, data } = useQuery(GET_SEARCH, {variables: { skip: offset, amount: PAGE_SIZE, filter: filter, searchWord: searchWord} });
+    const { loading, error, data } = useQuery(GET_SEARCH, {variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord} });
 
     useEffect(() => {
         if (data){

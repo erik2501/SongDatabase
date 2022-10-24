@@ -9,12 +9,10 @@ const HomePage = () => {
     const offsetLS = parseInt(sessionStorage.getItem('offset') ?? '');
     const [offset, setOffset] = useState<number>(() => isNaN(offsetLS) ? 0 : offsetLS);
     const [searchWord, setSearchWord] = useState<string>(sessionStorage.getItem('searchWord') ?? '');
-    const [filter, setFilter] = useState<string>(sessionStorage.getItem('filter') ?? 'Any');
 
     useEffect(() => {
         sessionStorage.setItem('searchWord', searchWord);
-        sessionStorage.setItem('filter', filter);
-    },[searchWord,filter])
+    },[searchWord])
 
 
     useEffect(() => {
@@ -28,8 +26,8 @@ const HomePage = () => {
     return (
         <div className='flexColCenterCenter'>
 
-            <Searchbar setOffset={setOffset} searchWord={searchWord} setSearchWord={setSearchWord} filter={filter} setFilter={setFilter}/>
-            <SongTable PAGE_SIZE={PAGE_SIZE} offset={offset} searchWord={searchWord} filter={filter}/>
+            <Searchbar setOffset={setOffset} searchWord={searchWord} setSearchWord={setSearchWord}/>
+            <SongTable PAGE_SIZE={PAGE_SIZE} offset={offset} searchWord={searchWord} />
 
             <div className='page-manager'>
                 <button style={{ visibility: pageNumber-2 <= 0 ? 'hidden' : 'visible'}}  onClick={() => setOffset(offset-2*PAGE_SIZE)}>{pageNumber-2} </button>
