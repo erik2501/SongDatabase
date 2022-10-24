@@ -31,7 +31,9 @@ const songSchema = new mongoose.Schema({
     songName: String,
     durationMS: Number,
     year: Number,
-    energy: Number
+    energy: Number,
+    imageURL: String
+
 }, { collection: "Music" });
 
 const reviewSchema = new mongoose.Schema({
@@ -70,7 +72,8 @@ const SongType = new GraphQLObjectType({
         songName: { type: GraphQLString },
         durationMS: { type: GraphQLInt },
         year: { type: GraphQLInt },
-        energy: { type: GraphQLFloat }
+        energy: { type: GraphQLFloat },
+        imageURL: { type: GraphQLString }
     },
 })
 
@@ -108,15 +111,7 @@ const schema = new GraphQLSchema({
             },
 
             // sanger basert på artistnavn
-            songsByArtistName: {
-                type: GraphQLList(SongType),
-                args: {
-                    artistName: { type: GraphQLString }
-                },
-                resolve: (root, args, context, info) => {
-                    return SongModel.find({ 'artistName': args.artistName }).exec();
-                }
-            },
+            // songsByArtistName: {
             songBySongID: {
                 type: GraphQLList(SongType),
                 args: {
@@ -124,6 +119,36 @@ const schema = new GraphQLSchema({
                 },
                 resolve: (root, args, context, info) => {
                     return SongModel.find({ 'songID': args.songID }).exec();
+                }
+            },
+            // songSearchLength: {
+            //     type: GraphQLInt,
+            //     args: {
+            //         filter: { type: GraphQLString },
+            //         searchWord: { type: GraphQLString }
+            //     },
+            //     resolve: (root, args, context, info) => {
+            //         return SongModel.find({ 'songName': { $regex: args.searchWord } }).length
+            //     }
+            // },
+            songSearch: {
+                type: GraphQLList(SongType),
+                args: {
+                    skip: { type: GraphQLInt },
+                    amount: { type: GraphQLInt },
+                    filter: { type: GraphQLString },
+                    searchWord: { type: GraphQLString }
+                },
+                resolve: (root, args, context, info) => {
+                    if (args.filter === 'Any') {
+                        return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord } }, { 'artistName': { $regex: args.searchWord } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    }
+                    else if (args.filter === 'Song') {
+                        return SongModel.find({ 'songName': { $regex: args.searchWord } }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    }
+                    else {
+                        return SongModel.find({ 'artistName': { $regex: args.searchWord } }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    }
                 }
             }
         }

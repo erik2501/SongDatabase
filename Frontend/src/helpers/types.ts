@@ -1,7 +1,8 @@
 export type Song = {
     songID: number,
     songName: string,
-    artistName: string
+    artistName: string,
+    imageURL: string
 }
 
 export type SongAllData = {
@@ -10,5 +11,6 @@ export type SongAllData = {
     artistName: string,
     durationMS: number,
     year: number,
-    energy: number
+    energy: number,
+    imageURL: string
 }
