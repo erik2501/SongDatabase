@@ -48,14 +48,12 @@ const reviewSchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
-    reviewDescription: String,
-    song: {
-        type: mongoose.SchemaTypes.ObjectId,
+    description: String,
+    songID: {
+        type: Number,
         required: true,
         immutable: true,
-        // validate: {
-        //     validator: v => v
-        // } sjekk at v finnes i songs?
+
     },
 })
 
@@ -81,10 +79,10 @@ const ReviewType = new GraphQLObjectType({
     name: 'review',
     fields: {
         _id: { type: GraphQLID },
-        reviewID: { type: GraphQLInt },
         userName: { type: GraphQLString },
         star: { type: GraphQLInt },
-        reviewDescription: { type: GraphQLString }
+        description: { type: GraphQLString },
+        songID: { type: GraphQLInt }
     }
 })
 
@@ -122,6 +120,29 @@ const schema = new GraphQLSchema({
                 }
             }
         }
+    }),
+    mutation: new GraphQLObjectType({
+        name: 'mutation',
+        fields: {
+            addReview: {
+                type: ReviewType,
+                args: {
+                    userName: { type: GraphQLString },
+                    star: { type: GraphQLInt },
+                    description: { type: GraphQLString },
+                    songID: { type: GraphQLInt }
+                },
+                resolve: (root, args, context, info) => {
+                    let review = new ReviewModel({
+                        userName: args.userName,
+                        star: args.star,
+                        description: args.description,
+                        songID: args.songID
+                    });
+                    return review.save()
+                }
+            }
+        }
     })
 })
 
@@ -135,9 +156,9 @@ app.listen(3001, () => {
     console.log("server running at 3001");
 });
 
-async function run() {
-    const rev = new ReviewModel({ userName: 'cat', star: 5, reviewDescription: 'bra', song: '6345556c61d7bda047cb5196' })
-    await rev.save()
-    console.log(rev)
-}
+// async function run() {
+//     const rev = new ReviewModel({ userName: 'cat', star: 5, reviewDescription: 'bra', song: '6345556c61d7bda047cb5196' })
+//     await rev.save()
+//     console.log(rev)
+// }
 // run()
