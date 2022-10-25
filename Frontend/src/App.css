@@ -11,7 +11,10 @@ header {
   height: 60px;
 }
 
-h1, h2, p {
+h1,
+h2,
+h3,
+p {
   margin: 0px;
 }
 
@@ -27,7 +30,7 @@ button {
   transition: 0.1;
 }
 
-button:disabled{
+button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
@@ -52,8 +55,8 @@ input[type=text] {
   border-radius: 10px;
 }
 
-select{
-  appearance:none;
+select {
+  appearance: none;
   width: 100px;
   border: none;
   border-radius: 10px;
@@ -71,6 +74,12 @@ select{
   color: gray;
 }
 
+.song-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
 .songCard {
   height: 100px;
   width: 100%;
@@ -84,7 +93,7 @@ select{
   transition: 0.1s;
 }
 
-.songCardContainer{
+.songCardContainer {
   width: 70%;
   display: flex;
   justify-content: center;
@@ -119,12 +128,21 @@ select{
 }
 
 .songDetails {
-  width: 70%;
+  width: 80%;
   margin-top: 30px;
   display: flex;
-  flex-direction: space-between;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
-.imgDetails{
+.imgDetails {
   height: 300px;
+}
+
+.reviewBox {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-between;
 }
