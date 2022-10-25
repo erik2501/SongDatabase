@@ -24,8 +24,24 @@ export default function ReviewComponent({ songID }: { songID: number }) {
 
     const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW);
 
+    console.log("username", userName)
+    console.log("star", star)
+
+    const handleSubmit = () => {
+        if (userName && star) {
+
+            setMessage("")
+            console.log("creating review")
+            createReview({ variables: { userName: userName, star: star, description: description, songID: songID } });
+            setUserName(undefined)
+            setStar(undefined)
+        } else {
+            setMessage('Fill inn name and stars')
+        }
+    }
+
     if (loading) return <h1>'Submitting...'</h1>;
-    if (error) return <h1>`Submission error! ${error.message}`</h1>;
+    // if (error) return <h1>`Submission error! ${error.message}`</h1>;
 
     return (
         <div className="reviewBox">
@@ -58,13 +74,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
                 />
             </div>
             <button
-                onClick={() => {
-                    if (userName !== null && star !== null) {
-                        createReview({ variables: { userName: userName, star: star, description: description, songID: songID } });
-                    } else {
-                        setMessage('Fill inn name and stars')
-                    }
-                }}
+                onClick={() => handleSubmit()}
             >
                 Submit review
             </button>
