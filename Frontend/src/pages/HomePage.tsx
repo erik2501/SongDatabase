@@ -3,6 +3,7 @@ import Searchbar from '../components/Searchbar';
 import SongTable from '../components/SongTable';
 import { gql, useLazyQuery } from '@apollo/client';
 import { debounce } from '../helpers/utils';
+import ScrollButton from '../components/ScrollButton';
 
 const PAGE_SIZE = 20;
 
@@ -45,7 +46,7 @@ const HomePage = () => {
 
             <Searchbar setOffset={setOffset} searchWord={searchWord} setSearchWord={setSearchWord}/>
             <SongTable PAGE_SIZE={PAGE_SIZE} offset={offset} searchWord={searchWord} />
-
+            <ScrollButton></ScrollButton>
             <div className='page-manager'>
                 <button style={{ visibility: pageNumber-2 <= 0 ? 'hidden' : 'visible'}}  onClick={() => setOffset(offset-2*PAGE_SIZE)}>{pageNumber-2} </button>
                 <button style={{ visibility: pageNumber-1 <= 0 ? 'hidden' : 'visible'}} onClick={() => setOffset(offset-PAGE_SIZE)}>{pageNumber-1} </button>
