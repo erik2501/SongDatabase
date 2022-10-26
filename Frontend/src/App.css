@@ -128,7 +128,6 @@ select {
 }
 
 .songDetails {
-  width: 80%;
   margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -145,4 +144,10 @@ select {
   flex-direction: column;
   height: 350px;
   justify-content: space-between;
+}
+
+.reviewList {
+  flex-wrap: wrap;
+  height: 400px;
+  overflow-y: scroll;
 }
