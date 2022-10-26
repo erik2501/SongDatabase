@@ -105,7 +105,7 @@ const schema = new GraphQLSchema({
                     searchWord: { type: GraphQLString }
                 },
                 resolve: (root, args, context, info) => {
-                    return SongModel.countDocuments({ $or: [ {'songName': { $regex: args.searchWord, '$options' : 'i' }}, { 'artistName': { $regex: args.searchWord,  '$options' : 'i'} }] })
+                    return SongModel.countDocuments({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] })
                 }
             },
             songSearch: {
@@ -116,7 +116,17 @@ const schema = new GraphQLSchema({
                     searchWord: { type: GraphQLString }
                 },
                 resolve: (root, args, context, info) => {
-                    return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options' : 'i'  } }, { 'artistName': { $regex: args.searchWord, '$options' : 'i'  } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                }
+            },
+            reviewsBySongID: {
+                type: GraphQLList(ReviewType),
+                args: {
+                    songID: { type: GraphQLInt },
+                    amount: { type: GraphQLInt }
+                },
+                resolve: (root, args, context, info) => {
+                    return ReviewModel.find({ 'songID': args.songID }).limit(args.amount).exec();
                 }
             }
         }
