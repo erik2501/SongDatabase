@@ -53,8 +53,6 @@ const SongDetails = ({ songID }: { songID: number }) => {
                 <ListReviews songID={songID} />
             </div>
         </div>
-
-
     )
 }
 
