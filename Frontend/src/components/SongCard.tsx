@@ -8,9 +8,13 @@ const SongCard = ({song}: {song: Song}) => {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down(730))
+
+    function onKeyUp(e : any){
+        if (e.key === "Enter") nav('/song/' + song.songID);
+      }
     return(
-        <a className='songCardContainer' onClick={() => nav('/song/' + song.songID)}>
-            <div className='songCard'>
+        <a className='songCardContainer' onClick={() => nav('/song/' + song.songID)} onKeyUp={(e) => onKeyUp(e)}>
+            <div className='songCard' tabIndex={0}>
                 <img className='albumcoverImage' src={song.imageURL}></img>
                 <div className='textbox'>
                     {!matches ? 
