@@ -1,6 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { SongAllData } from '../helpers/types';
+import ListReviews from './ListReviewsComponent';
+import ReviewCard from './ReviewCard';
 import ReviewComponent from './ReviewComponent';
 
 const GET_SONG_BY_SONGID = gql`
@@ -33,19 +35,26 @@ const SongDetails = ({ songID }: { songID: number }) => {
     if (!song) return <h1>Could not find this song.</h1>
 
     return (
-        <div className='songDetails'>
-            <div className="song-info">
-                <img className='imgDetails' src={song.imageURL}></img>
-                <div className='textbox'>
-                    <h1>{song?.songName} </h1>
-                    <p>Artist: {song?.artistName}</p>
-                    <p>Year: {song?.year}</p>
-                    <p>Duration: {song?.durationMS}</p>
-                    <p>Energy: {song?.energy}</p>
+        <div>
+            <div className='songDetails'>
+                <div className="song-info">
+                    <img className='imgDetails' src={song.imageURL}></img>
+                    <div className='textbox'>
+                        <h1>{song?.songName} </h1>
+                        <p>Artist: {song?.artistName}</p>
+                        <p>Year: {song?.year}</p>
+                        <p>Duration: {song?.durationMS}</p>
+                        <p>Energy: {song?.energy}</p>
+                    </div>
                 </div>
+                <ReviewComponent songID={songID} />
             </div>
-            <ReviewComponent songID={songID} />
+            <div className="reviewList">
+                <ListReviews songID={songID} />
+            </div>
         </div>
+
+
     )
 }
 

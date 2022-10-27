@@ -18,6 +18,8 @@ p {
   margin: 0px;
 }
 
+
+
 button {
   border: none;
   border-radius: 10px;
@@ -65,6 +67,16 @@ select {
   padding: 20px 20px 20px 20px;
   outline: none;
   font-size: medium;
+}
+
+.smallh2{
+  display: block;
+  font-size:0.8em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 
 .textbox {
@@ -128,7 +140,6 @@ select {
 }
 
 .songDetails {
-  width: 80%;
   margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
@@ -145,4 +156,22 @@ select {
   flex-direction: column;
   height: 350px;
   justify-content: space-between;
+}
+
+.reviewList {
+  flex-wrap: wrap;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.button4 {
+  position: fixed;
+  width: 90%;
+  left: 50%;
+  bottom: 5%;
+  height: 50px;
+  font-size: 3rem;
+  z-index: 1;
+  cursor: pointer;
+  color: green;
 }
