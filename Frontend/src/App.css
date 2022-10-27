@@ -18,6 +18,8 @@ p {
   margin: 0px;
 }
 
+
+
 button {
   border: none;
   border-radius: 10px;
@@ -65,6 +67,16 @@ select {
   padding: 20px 20px 20px 20px;
   outline: none;
   font-size: medium;
+}
+
+.smallh2{
+  display: block;
+  font-size:0.8em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
 
 .textbox {
