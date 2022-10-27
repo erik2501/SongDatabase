@@ -1,7 +1,6 @@
 import { Song } from '../helpers/types';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { fontSize } from '@mui/system';
 
 const SongCard = ({song}: {song: Song}) => {
 
