@@ -1,31 +1,35 @@
-import { Dispatch, SetStateAction, useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useRecoilState } from 'recoil';
+import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
+import { Button } from "@mui/material";
 
-interface SearchWordProps {
-    setOffset: Dispatch<SetStateAction<number>>;
-    searchWord: string;
-    setSearchWord: Dispatch<SetStateAction<string>>;
-    year: number;
-    setYear: Dispatch<SetStateAction<number>>
-}
 
-const Searchbar = ({ setOffset, searchWord, setSearchWord, year, setYear }: SearchWordProps) => {
+const Searchbar = () => {
+
+    const [searchWord, setSearchWord] = useRecoilState(searchWordAtom);
+    const [offset, setOffset] = useRecoilState(offsetAtom);
+    const [year, setYear] = useRecoilState(yearAtom);
 
 
     const handleSearch = (value: string) => {
         setSearchWord(value);
-        console.log('setter offset til 0')
         setOffset(0);
-    } 
-
+    }
 
     const handleYearChange = (event: SelectChangeEvent) => {
         setYear(parseInt(event.target.value) ?? 0);
+        setOffset(0);
+    }
+
+    const handleClear = () => {
+        setSearchWord('');
+        setYear(0);
+        setOffset(0);
     }
 
     return (
@@ -38,17 +42,17 @@ const Searchbar = ({ setOffset, searchWord, setSearchWord, year, setYear }: Sear
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" label="Search song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)}/>
+            <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)}/>
             
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                <InputLabel id="demo-simple-select-label">Year</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     // value={year}
                     label="Year"
                     onChange={handleYearChange}
-                    defaultValue='0'
+                    value={year.toString() ?? 0}
                 >   
                     <MenuItem value={0}>All years</MenuItem>
                     <MenuItem value={1998}>1998</MenuItem>
@@ -76,6 +80,7 @@ const Searchbar = ({ setOffset, searchWord, setSearchWord, year, setYear }: Sear
                     <MenuItem value={2020}>2020</MenuItem>
                 </Select>
             </FormControl>
+            <Button variant="contained" onClick={handleClear}>Clear</Button>
         </Box>
     )
 }
