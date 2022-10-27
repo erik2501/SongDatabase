@@ -42,26 +42,7 @@ const SongDetails = ({ songID }: { songID: number }) => {
     if (!song) return <h1>Could not find this song.</h1>
 
     return (
-        /*
-        <div>
-            <div className='songDetails'>
-                <div className="song-info">
-                    <img className='imgDetails' src={song.imageURL}></img>
-                    <div className='textbox'>
-                        <h1>{song?.songName} </h1>
-                        <p>Artist: {song?.artistName}</p>
-                        <p>Year: {song?.year}</p>
-                        <p>Duration: {Math.floor(song?.durationMS / (1000*60))}:{Math.round((song?.durationMS/1000) % (60))}</p>
-                        <p>Energy: {song?.energy}</p>
-                    </div>
-                </div>
-                <ReviewComponent songID={songID} />
-            </div>
-            <div className="reviewList">
-                <ListReviews songID={songID} />
-            </div>
-        </div>
-        */
+
 
         <div className='songDetails'>
      <Card sx={{ display: 'flex', marginRight:15}}>
