@@ -4,6 +4,8 @@ import { Song } from "../helpers/types";
 import ErrorPage from "../pages/ErrorPage";
 import SongCard from "./SongCard";
 import { debounce } from "../helpers/utils";
+import { useRecoilValue } from 'recoil';
+import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
 
 const GET_SEARCH = gql`
     query Get_Search ($searchWord: String, $skip: Int, $amount:Int, $year: Int){
@@ -16,22 +18,20 @@ const GET_SEARCH = gql`
     }
 `;
 
-interface IProps {
-    PAGE_SIZE: number;
-    offset: number;
-    searchWord: string;
-    year: number;
-}
+const PAGE_SIZE = 10;
 
-const debounceSearch = debounce((fetchFunc: () => void) => fetchFunc()) 
+const debounceFetch = debounce((fetchFunc: () => void) => fetchFunc()) 
 
 
-const SongTable = ({PAGE_SIZE, offset, searchWord, year }: IProps) => {
+const SongTable = () => {
 
+    const searchWord = useRecoilValue(searchWordAtom);
+    const offset = useRecoilValue(offsetAtom);
+    const year = useRecoilValue(yearAtom);
 
-    console.log('offset:', offset)
-    console.log('searchWord:', searchWord)
-    console.log('year:', year)
+    // console.log('offset:', offset)
+    // console.log('searchWord:', searchWord)
+    // console.log('year:', year)
 
     const [songs, setSongs] = useState<Song[]>([]);
     const [fetchSongs, { loading, error, data }] = useLazyQuery(GET_SEARCH);
@@ -43,7 +43,7 @@ const SongTable = ({PAGE_SIZE, offset, searchWord, year }: IProps) => {
     },[data])
 
     useEffect(() => {
-        debounceSearch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } }))
+        debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } }))
     }, [searchWord, offset, year])
 
     if (error) return <ErrorPage message={`Error! ${error.message}`}/>;

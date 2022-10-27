@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import RoutesComponent from './pages/RoutesComponent';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   
@@ -15,7 +16,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <ApolloProvider client={client}>
-          <RoutesComponent/>
+          <RecoilRoot>
+            <RoutesComponent/>
+          </RecoilRoot>
         </ApolloProvider>
       </BrowserRouter>
     </div>

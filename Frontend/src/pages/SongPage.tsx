@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ErrorPage from "./ErrorPage";
 
 
-const SongPage = () => { // {songID}: {songID: number}
+const SongPage = () => {
 
     const { songID } = useParams<string>();
 	
@@ -22,7 +22,7 @@ const SongPage = () => { // {songID}: {songID: number}
 
 	return (
 		<div className="flexColCenterCenter">
-			<button onClick={() => nav('/')}>Back to songsearch</button>
+			<a onClick={() => nav('/')}><button>Back to songsearch</button></a>
 			<SongDetails songID={songIDInt} />
 		</div>
 	)

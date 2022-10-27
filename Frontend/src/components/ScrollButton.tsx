@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
 import {FaArrowCircleUp} from 'react-icons/fa';
-
 
 
 const ScrollButton = () => {
@@ -10,7 +8,7 @@ const ScrollButton = () => {
     }
 
     return(
-            <FaArrowCircleUp onClick={handleScrollUp} className='button4'></FaArrowCircleUp>
+        <FaArrowCircleUp onClick={handleScrollUp} className='button4'></FaArrowCircleUp>
     );
 }
 
