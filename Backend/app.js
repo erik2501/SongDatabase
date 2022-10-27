@@ -17,6 +17,7 @@ const {
 
 var app = Express();
 var cors = require("cors");
+const e = require("express");
 app.use(cors());
 
 console.log("Starting...")
@@ -102,10 +103,16 @@ const schema = new GraphQLSchema({
             songSearchCount: {
                 type: GraphQLInt,
                 args: {
-                    searchWord: { type: GraphQLString }
+                    searchWord: { type: GraphQLString },
+                    year: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
-                    return SongModel.countDocuments({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] })
+                    if (args.year === 0){
+                        return SongModel.countDocuments({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] })
+                    }
+                    else {
+                        return SongModel.countDocuments({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] })
+                    }
                 }
             },
             songSearch: {
@@ -113,10 +120,16 @@ const schema = new GraphQLSchema({
                 args: {
                     skip: { type: GraphQLInt },
                     amount: { type: GraphQLInt },
-                    searchWord: { type: GraphQLString }
+                    searchWord: { type: GraphQLString },
+                    year: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
-                    return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    if (args.year === 0) {
+                        return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    } else {
+                        return SongModel.find({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                    }
+                    
                 }
             },
             reviewsBySongID: {
