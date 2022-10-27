@@ -1,8 +1,9 @@
-import { Rating, TextField } from '@mui/material';
+import { Box, Rating, TextField } from '@mui/material';
 // import { ObjectId } from 'mongoose';
 import { useState } from 'react';
 import { start } from 'repl';
 import { gql, useMutation } from '@apollo/client';
+
 
 
 const CREATE_REVIEW = gql`
@@ -47,32 +48,32 @@ export default function ReviewComponent({ songID }: { songID: number }) {
         <div className="reviewBox">
             <h3>Add review:</h3>
 
-            <div>
+            <Box>
                 <TextField
                     id="userName"
                     label="Name"
-                    variant="filled"
+                    variant="outlined"
                     onChange={(e) =>
                         setUserName(e.target.value)} />
-            </div>
-            <div>
+            </Box>
+            <Box>
                 <Rating
                     name="star"
                     onChange={(event, newValue) => {
                         setStar(newValue);
                     }}
                 />
-            </div>
-            <div>
+            </Box>
+            <Box>
                 <TextField
                     id="filled-multiline-static"
                     label="Description"
                     multiline
                     rows={4}
-                    variant="filled"
+                    variant="outlined"
                     onChange={(e) => setDescription(e.target.value)}
                 />
-            </div>
+            </Box>
             <button
                 onClick={() => handleSubmit()}
             >
