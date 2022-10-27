@@ -5,6 +5,7 @@ import { gql, useLazyQuery } from '@apollo/client';
 import { debounce } from '../helpers/utils';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import ScrollButton from '../components/ScrollButton';
 
 const PAGE_SIZE = 10;
 
@@ -48,6 +49,7 @@ const HomePage = () => {
 
             <Searchbar setOffset={setOffset} searchWord={searchWord} setSearchWord={setSearchWord}/>
             <SongTable PAGE_SIZE={PAGE_SIZE} offset={offset} searchWord={searchWord} />
+            <ScrollButton/>
             <Stack spacing={2}>
                 <Pagination count={maxPages} page={offset/PAGE_SIZE + 1} onChange={handleChange} variant="outlined" color="primary" />
             </Stack>
