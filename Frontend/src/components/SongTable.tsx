@@ -49,14 +49,14 @@ const SongTable = () => {
     if (error) return <ErrorPage message={`Error! ${error.message}`}/>;
 
     return (
-        <div className="flexColCenterCenter">
+        <div className="flexColCenterCenter" data-testid="songtable">
             <div style={{height: '20px'}}>
                 {loading ? 'Loading..' : ''}
             </div>
             {(songs.length === 0 && !loading) ? 'No songs were found.' : 
             songs.map( (song, index) => {
                 return(
-                    <SongCard key={index} song={song}/>
+                    <SongCard key={index} song={song} data-testid={index}/>
                 )
             })}
         </div>

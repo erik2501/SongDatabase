@@ -35,15 +35,15 @@ const Searchbar = () => {
     return (
 
         <Box
-            component="form"    
+            component="form"
             sx={{
                 '& > :not(style)': { m: 1, width: '25ch' },
             }}
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)}/>
-            
+            <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)} />
+
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Year</InputLabel>
                 <Select
@@ -53,7 +53,7 @@ const Searchbar = () => {
                     label="Year"
                     onChange={handleYearChange}
                     value={year.toString() ?? 0}
-                >   
+                >
                     <MenuItem value={0}>All years</MenuItem>
                     <MenuItem value={1998}>1998</MenuItem>
                     <MenuItem value={1999}>1999</MenuItem>
