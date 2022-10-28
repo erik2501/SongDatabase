@@ -44,7 +44,11 @@ const SongTable = () => {
 
     useEffect(() => {
         debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } }))
-    }, [searchWord, offset, year])
+    }, [searchWord, year])
+
+    useEffect(() => {
+        fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } })
+    },[offset])
 
     if (error) return <ErrorPage message={`Error! ${error.message}`}/>;
 
