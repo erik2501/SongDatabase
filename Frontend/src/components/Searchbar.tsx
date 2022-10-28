@@ -18,7 +18,7 @@ const Searchbar = ({ setOffset, searchWord, setSearchWord }: SearchWordProps) =>
     return (
         <form className="searchbar">
             <label>
-                <input type="text" value={searchWord} onChange={e => handleSearch(e.target.value)} name="search" placeholder="Search.."></input>
+                <input type="text" value={searchWord} onChange={e => handleSearch(e.target.value)} name="search" placeholder="Search.." data-testid="searchbar"></input>
             </label>
         </form>
     )
