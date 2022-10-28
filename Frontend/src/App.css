@@ -84,6 +84,7 @@ select {
   text-align: left;
   font-size: larger;
   color: gray;
+  width: 65%;
 }
 
 .song-info {

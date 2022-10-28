@@ -34,7 +34,6 @@ const songSchema = new mongoose.Schema({
     year: Number,
     energy: Number,
     imageURL: String
-
 }, { collection: "songs" });
 
 const reviewSchema = new mongoose.Schema({
@@ -87,6 +86,11 @@ const ReviewType = new GraphQLObjectType({
     }
 })
 
+const AvgScoreType = new GraphQLObjectType({
+    name: 'avgscore',
+    fields: {_id: {type: GraphQLInt}, avgScore: {type: GraphQLFloat}}
+})
+
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: "Query",
@@ -130,6 +134,15 @@ const schema = new GraphQLSchema({
                         return SongModel.find({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
                     }
                     
+                }
+            },
+            reviewAvgScoreBySongID: {
+                type: GraphQLList(AvgScoreType),
+                args: {
+                    songID: { type: GraphQLInt }
+                },
+                resolve: (root, args, context, info) => {
+                    return ReviewModel.aggregate().match({ 'songID': args.songID }).group({_id:null, avgScore:{$avg:"$star"}})
                 }
             },
             reviewsBySongID: {
