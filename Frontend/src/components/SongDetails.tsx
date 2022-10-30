@@ -52,7 +52,7 @@ const SongDetails = ({ songID }: { songID: number }) => {
                 image={song.imageURL}
                 alt="Live from space album cover"
             />
-            <Box>
+            <Box style={{paddingLeft: '20px'}}>
                 <Box sx={{display : 'flex', width : '200px',marginTop:'12%'}}>
                     <MusicNoteIcon></MusicNoteIcon>
                     <Typography>{song?.songName}</Typography>
