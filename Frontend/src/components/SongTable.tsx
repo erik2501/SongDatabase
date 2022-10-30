@@ -5,11 +5,11 @@ import ErrorPage from "../pages/ErrorPage";
 import SongCard from "./SongCard";
 import { debounce } from "../helpers/utils";
 import { useRecoilValue } from 'recoil';
-import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
+import { offsetAtom, yearAtom, searchWordAtom, orderAtom } from '../shared/globalState';
 
 const GET_SEARCH = gql`
-    query Get_Search ($searchWord: String, $skip: Int, $amount:Int, $year: Int){
-        songSearch(skip: $skip, amount:$amount, searchWord: $searchWord, year: $year ) {
+    query Get_Search ($searchWord: String, $skip: Int, $amount:Int, $year: Int, $order: Int){
+        songSearch(skip: $skip, amount:$amount, searchWord: $searchWord, year: $year, order: $order ) {
             songID
             artistName
             songName
@@ -28,10 +28,7 @@ const SongTable = () => {
     const searchWord = useRecoilValue(searchWordAtom);
     const offset = useRecoilValue(offsetAtom);
     const year = useRecoilValue(yearAtom);
-
-    // console.log('offset:', offset)
-    // console.log('searchWord:', searchWord)
-    // console.log('year:', year)
+    const order = useRecoilValue(orderAtom);
 
     const [songs, setSongs] = useState<Song[]>([]);
     const [fetchSongs, { loading, error, data }] = useLazyQuery(GET_SEARCH);
@@ -43,12 +40,12 @@ const SongTable = () => {
     },[data])
 
     useEffect(() => {
-        debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } }))
+        debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year, order: order } }))
     }, [searchWord, year])
 
     useEffect(() => {
-        fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year } })
-    },[offset])
+        fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year, order: order } })
+    },[offset, order])
 
     if (error) return <ErrorPage message={`Error! ${error.message}`}/>;
 

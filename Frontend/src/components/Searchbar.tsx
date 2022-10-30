@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
-import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
+import { offsetAtom, yearAtom, searchWordAtom, orderAtom } from '../shared/globalState';
 import { Button } from "@mui/material";
 
 
@@ -14,7 +14,7 @@ const Searchbar = () => {
     const [searchWord, setSearchWord] = useRecoilState(searchWordAtom);
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const [year, setYear] = useRecoilState(yearAtom);
-
+    const [order, setOrder] = useRecoilState(orderAtom);
 
     const handleSearch = (value: string) => {
         setSearchWord(value);
@@ -26,10 +26,16 @@ const Searchbar = () => {
         setOffset(0);
     }
 
+    const handleOrderChange = (event: SelectChangeEvent) => {
+        setOrder(parseInt(event.target.value) ?? 0);
+        setOffset(0);
+    }
+
     const handleClear = () => {
         setSearchWord('');
         setYear(0);
         setOffset(0);
+        setOrder(-1);
     }
 
     return (
@@ -45,11 +51,10 @@ const Searchbar = () => {
             <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)} />
 
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel id="year-select-label">Year</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    // value={year}
+                    labelId="year-select-label"
+                    id="year-select"
                     label="Year"
                     onChange={handleYearChange}
                     value={year.toString() ?? 0}
@@ -80,6 +85,21 @@ const Searchbar = () => {
                     <MenuItem value={2020}>2020</MenuItem>
                 </Select>
             </FormControl>
+
+            <FormControl fullWidth>
+                <InputLabel id="order-select-label">Order</InputLabel>
+                <Select
+                    labelId="order-select-label"
+                    id="order-select"
+                    label="Order"
+                    onChange={handleOrderChange}
+                    value={order.toString() ?? -1}
+                >
+                    <MenuItem value={-1}>Newest first</MenuItem>
+                    <MenuItem value={0}>Oldest first</MenuItem>
+                </Select>
+            </FormControl>
+
             <Button variant="contained" onClick={handleClear}>Clear</Button>
         </Box>
     )

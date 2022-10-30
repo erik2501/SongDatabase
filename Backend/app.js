@@ -125,13 +125,14 @@ const schema = new GraphQLSchema({
                     skip: { type: GraphQLInt },
                     amount: { type: GraphQLInt },
                     searchWord: { type: GraphQLString },
-                    year: { type: GraphQLInt }
+                    year: { type: GraphQLInt },
+                    order: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
                     if (args.year === 0) {
-                        return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                        return SongModel.find({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }).sort({ songID: args.order }).skip(args.skip).limit(args.amount).exec()
                     } else {
-                        return SongModel.find({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] }).sort({ songID: -1 }).skip(args.skip).limit(args.amount).exec()
+                        return SongModel.find({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] }).sort({ songID: args.order }).skip(args.skip).limit(args.amount).exec()
                     }
                     
                 }

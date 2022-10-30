@@ -30,12 +30,11 @@ export default function ReviewComponent({ songID }: { songID: number }) {
 
     const handleSubmit = () => {
         if (userName && star) {
-
             setMessage("")
-            console.log("creating review")
             createReview({ variables: { userName: userName, star: star, description: description, songID: songID } });
             setUserName(undefined)
             setStar(undefined)
+            window.location.reload()
         } else {
             setMessage('Fill inn name and stars')
         }
@@ -74,9 +73,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
                     onChange={(e) => setDescription(e.target.value)}
                 />
             </Box>
-            <button
-                onClick={() => handleSubmit()}
-            >
+            <button onClick={() => handleSubmit()}>
                 Submit review
             </button>
             <p>{message}</p>

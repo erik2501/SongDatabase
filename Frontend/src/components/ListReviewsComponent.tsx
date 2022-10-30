@@ -22,8 +22,8 @@ export default function ListReviews({ songID }: { songID: number }) {
     return (
         <div>
             {
-                data.reviewsBySongID?.map((r: { userName: string; star: number; description: string; }) => (
-                    <ReviewCard userName={r.userName} star={r.star} description={r.description} key={r.userName + r.description} />
+                data.reviewsBySongID?.map( (review: { userName: string; star: number; description: string; }, index: number) => (
+                    <ReviewCard userName={review.userName} star={review.star} description={review.description} key={index} />
                 ))
             }
         </div>
