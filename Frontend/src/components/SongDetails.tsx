@@ -1,10 +1,9 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { SongAllData } from '../helpers/types';
 import ListReviews from './ListReviewsComponent';
-import ReviewCard from './ReviewCard';
 import ReviewComponent from './ReviewComponent';
-import { Card, CardContent, Box, Typography, CardMedia } from '@mui/material';
+import { Card, Box, Typography, CardMedia } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';

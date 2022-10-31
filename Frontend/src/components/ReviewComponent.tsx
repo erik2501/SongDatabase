@@ -2,7 +2,7 @@ import { Box, Rating, TextField } from '@mui/material';
 // import { ObjectId } from 'mongoose';
 import { useState } from 'react';
 import { start } from 'repl';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { CREATE_REVIEW } from '../helpers/queries';
 
 
