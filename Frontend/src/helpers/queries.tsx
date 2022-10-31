@@ -61,3 +61,8 @@ export const GET_SEARCH = gql`
     }
 `;
 
+export const GET_DISTINCT_YEARS = gql`
+    query {
+        getDistinctYears
+    }
+`;

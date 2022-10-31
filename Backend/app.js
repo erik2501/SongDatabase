@@ -155,6 +155,12 @@ const schema = new GraphQLSchema({
                 resolve: (root, args, context, info) => {
                     return ReviewModel.find({ 'songID': args.songID }).sort({ _id: -1 }).limit(args.amount).exec();
                 }
+            },
+            getDistinctYears: {
+                type: GraphQLList(GraphQLInt),
+                resolve: (root, args, context, info) => {
+                    return SongModel.distinct('year')
+                }
             }
         }
     }),
