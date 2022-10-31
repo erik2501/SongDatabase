@@ -1,16 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 import ReviewCard from './ReviewCard';
-
-const GET_REVIEWS = gql`
-    query GetReviews ($songID: Int!, $amount: Int!) {
-        reviewsBySongID (songID: $songID, amount: $amount) {
-            userName
-            star
-            description
-            songID
-        }
-    }
-    `
+import { GET_REVIEWS } from '../helpers/queries';
 
 export default function ListReviews({ songID }: { songID: number }) {
 
@@ -22,7 +12,7 @@ export default function ListReviews({ songID }: { songID: number }) {
     return (
         <div>
             {
-                data.reviewsBySongID?.map( (review: { userName: string; star: number; description: string; }, index: number) => (
+                data.reviewsBySongID?.map((review: { userName: string; star: number; description: string; }, index: number) => (
                     <ReviewCard userName={review.userName} star={review.star} description={review.description} key={index} />
                 ))
             }

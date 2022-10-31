@@ -4,14 +4,8 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import { gql, useQuery } from '@apollo/client';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
+import { GET_AVG_REVIEW_SCORE } from '../helpers/queries';
 
-export const GET_AVG_REVIEW_SCORE = gql`
-    query ( $songID: Int ){
-        reviewAvgScoreBySongID( songID:$songID ) {
-        avgScore
-        }
-    }
-`;
 
 
 const SongCard = ({ song }: { song: Song }) => {

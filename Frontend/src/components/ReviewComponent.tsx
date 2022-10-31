@@ -3,18 +3,9 @@ import { Box, Rating, TextField } from '@mui/material';
 import { useState } from 'react';
 import { start } from 'repl';
 import { gql, useMutation } from '@apollo/client';
+import { CREATE_REVIEW } from '../helpers/queries';
 
 
-
-export const CREATE_REVIEW = gql`
-    mutation addReviewForSong($userName: String!, $star: Int!, $description: String!, $songID: Int!) {
-        addReview(userName: $userName, star: $star, description: $description, songID: $songID) {
-            userName
-            star
-            description
-            songID
-        }
-    }`
 
 export default function ReviewComponent({ songID }: { songID: number }) {
 

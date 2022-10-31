@@ -1,7 +1,6 @@
 import Card from "@mui/material/Card";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
-import internal from "stream";
 
 interface reviewProp {
     userName: string,

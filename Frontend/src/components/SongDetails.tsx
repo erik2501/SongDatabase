@@ -10,21 +10,10 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import TimerIcon from '@mui/icons-material/Timer';
+import { GET_SONG_BY_SONGID } from '../helpers/queries';
 
 
-const GET_SONG_BY_SONGID = gql`
-    query GetSong ($songID: Int!) {
-        songBySongID (songID: $songID) {
-            songID
-            songName
-            artistName
-            durationMS
-            year
-            energy
-            imageURL
-        }
-    }
-`;
+
 
 const SongDetails = ({ songID }: { songID: number }) => {
 

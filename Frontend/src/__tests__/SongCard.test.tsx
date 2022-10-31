@@ -1,6 +1,5 @@
 import SongCard from "../components/SongCard"
 import renderer from 'react-test-renderer'
-import { render, screen } from '@testing-library/react';
 import { Song } from '../helpers/types'
 import { MockedProvider } from "@apollo/client/testing";
 import { GET_AVG_REVIEW_SCORE } from '../components/SongCard'
