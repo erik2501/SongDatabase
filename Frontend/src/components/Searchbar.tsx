@@ -7,6 +7,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
 import { offsetAtom, yearAtom, searchWordAtom, orderAtom } from '../shared/globalState';
 import { Button } from "@mui/material";
+import { useQuery } from '@apollo/client';
+import { GET_DISTINCT_YEARS } from "../helpers/queries";
 
 
 const Searchbar = () => {
@@ -15,6 +17,9 @@ const Searchbar = () => {
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const [year, setYear] = useRecoilState(yearAtom);
     const [order, setOrder] = useRecoilState(orderAtom);
+
+    // const { error, data } = useQuery(GET_DISTINCT_YEARS);
+
 
     const handleSearch = (value: string) => {
         setSearchWord(value);
