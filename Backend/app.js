@@ -88,7 +88,7 @@ const ReviewType = new GraphQLObjectType({
 
 const AvgScoreType = new GraphQLObjectType({
     name: 'avgscore',
-    fields: {_id: {type: GraphQLInt}, avgScore: {type: GraphQLFloat}}
+    fields: { _id: { type: GraphQLInt }, avgScore: { type: GraphQLFloat } }
 })
 
 const schema = new GraphQLSchema({
@@ -111,7 +111,7 @@ const schema = new GraphQLSchema({
                     year: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
-                    if (args.year === 0){
+                    if (args.year === 0) {
                         return SongModel.countDocuments({ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] })
                     }
                     else {
@@ -134,7 +134,7 @@ const schema = new GraphQLSchema({
                     } else {
                         return SongModel.find({ $and: [{ $or: [{ 'songName': { $regex: args.searchWord, '$options': 'i' } }, { 'artistName': { $regex: args.searchWord, '$options': 'i' } }] }, { 'year': args.year }] }).sort({ songID: args.order }).skip(args.skip).limit(args.amount).exec()
                     }
-                    
+
                 }
             },
             reviewAvgScoreBySongID: {
@@ -143,7 +143,7 @@ const schema = new GraphQLSchema({
                     songID: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
-                    return ReviewModel.aggregate().match({ 'songID': args.songID }).group({_id:null, avgScore:{$avg:"$star"}})
+                    return ReviewModel.aggregate().match({ 'songID': args.songID }).group({ _id: null, avgScore: { $avg: "$star" } })
                 }
             },
             reviewsBySongID: {
@@ -153,7 +153,7 @@ const schema = new GraphQLSchema({
                     amount: { type: GraphQLInt }
                 },
                 resolve: (root, args, context, info) => {
-                    return ReviewModel.find({ 'songID': args.songID }).limit(args.amount).exec();
+                    return ReviewModel.find({ 'songID': args.songID }).sort({ _id: -1 }).limit(args.amount).exec();
                 }
             }
         }
