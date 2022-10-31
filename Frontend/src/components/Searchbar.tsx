@@ -48,7 +48,7 @@ const Searchbar = () => {
             noValidate
             autoComplete="off"
         >
-            <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)} />
+            <TextField id="outlined-basic" label="Search for song or artist" variant="outlined" value={searchWord} onChange={e => handleSearch(e.target.value)} data-testid="searchbar" />
 
             <FormControl fullWidth>
                 <InputLabel id="year-select-label">Year</InputLabel>
@@ -58,6 +58,7 @@ const Searchbar = () => {
                     label="Year"
                     onChange={handleYearChange}
                     value={year.toString() ?? 0}
+                    data-testid="selectYear"
                 >
                     <MenuItem value={0}>All years</MenuItem>
                     <MenuItem value={1998}>1998</MenuItem>
@@ -94,13 +95,14 @@ const Searchbar = () => {
                     label="Order"
                     onChange={handleOrderChange}
                     value={order.toString() ?? -1}
+                    data-testid="selectOrder"
                 >
                     <MenuItem value={-1}>Newest first</MenuItem>
                     <MenuItem value={0}>Oldest first</MenuItem>
                 </Select>
             </FormControl>
 
-            <Button variant="contained" onClick={handleClear}>Clear</Button>
+            <Button variant="contained" onClick={handleClear} data-testid="clearbutton">Clear</Button>
         </Box>
     )
 }

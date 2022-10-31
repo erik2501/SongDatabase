@@ -6,7 +6,7 @@ import { gql, useMutation } from '@apollo/client';
 
 
 
-const CREATE_REVIEW = gql`
+export const CREATE_REVIEW = gql`
     mutation addReviewForSong($userName: String!, $star: Int!, $description: String!, $songID: Int!) {
         addReview(userName: $userName, star: $star, description: $description, songID: $songID) {
             userName
@@ -34,7 +34,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
             createReview({ variables: { userName: userName, star: star, description: description, songID: songID } });
             setUserName(undefined)
             setStar(undefined)
-            window.location.reload()
+            //window.location.reload()
         } else {
             setMessage('Fill inn name and stars')
         }
@@ -52,8 +52,8 @@ export default function ReviewComponent({ songID }: { songID: number }) {
                     id="userName"
                     label="Name"
                     variant="outlined"
-                    onChange={(e) =>
-                        setUserName(e.target.value)} />
+                    onChange={(e) => setUserName(e.target.value)} 
+                    data-testid="username"/>
             </Box>
             <Box>
                 <Rating
@@ -61,6 +61,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
                     onChange={(event, newValue) => {
                         setStar(newValue);
                     }}
+                    data-testid="star"
                 />
             </Box>
             <Box>
@@ -71,9 +72,10 @@ export default function ReviewComponent({ songID }: { songID: number }) {
                     rows={4}
                     variant="outlined"
                     onChange={(e) => setDescription(e.target.value)}
+                    data-testid="description"
                 />
             </Box>
-            <button onClick={() => handleSubmit()}>
+            <button onClick={() => handleSubmit()} data-testid="submit">
                 Submit review
             </button>
             <p>{message}</p>
