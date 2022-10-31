@@ -159,7 +159,7 @@ const schema = new GraphQLSchema({
             getDistinctYears: {
                 type: GraphQLList(GraphQLInt),
                 resolve: (root, args, context, info) => {
-                    return SongModel.distinct('year')
+                    return SongModel.distinct('year').exec()
                 }
             }
         }
