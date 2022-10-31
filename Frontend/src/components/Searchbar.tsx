@@ -102,7 +102,7 @@ const Searchbar = () => {
                 </Select>
             </FormControl>
 
-            <Button variant="contained" onClick={handleClear} data-testid="clearbutton">Clear</Button>
+            <Button variant="contained" onClick={handleClear} data-testid="clearbutton" sx={{ height: 56}}>Clear</Button>
         </Box>
     )
 }

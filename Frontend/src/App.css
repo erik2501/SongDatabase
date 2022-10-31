@@ -163,6 +163,7 @@ select {
   flex-wrap: wrap;
   height: 400px;
   overflow-y: scroll;
+  width:100%;
 }
 
 .button4 {
