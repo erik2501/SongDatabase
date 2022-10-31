@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders when passed a song 1`] = `
+<a
+  className="songCardContainer"
+  onClick={[Function]}
+  onKeyUp={[Function]}
+>
+  <div
+    className="songCard"
+    tabIndex={0}
+  >
+    <img
+      className="albumcoverImage"
+      src="https://upload.wikimedia.org/wikipedia/en/2/24/Britney_Spears_-_Oops%2"
+    />
+    <div
+      className="textbox"
+    >
+      <h2>
+        Oops!...I Did It Again
+      </h2>
+      <p>
+        Artist: Britney Spears
+      </p>
+    </div>
+    <div
+      className="avgScoreContainer"
+    />
+  </div>
+</a>
+`;
+
+exports[`renders when passed name and rating and description 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
+    style={
+      Object {
+        "paddingBottom": "15px",
+      }
+    }
+  >
+    <h5>
+      snapshotTestName
+    </h5>
+    <span
+      aria-label="1 Star"
+      className="MuiRating-root MuiRating-sizeMedium MuiRating-readyOnly css-ryrseu-MuiRating-root"
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="img"
+    >
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconFilled css-7qmtgc-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+    </span>
+    <p>
+      bra
+    </p>
+  </div>
+</div>
+`;
