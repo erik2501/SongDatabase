@@ -1,18 +1,24 @@
 /// <reference types="cypress" />
 
-describe('example to-do app', () => {
+describe('end to end test', () => {
 
-
-
-    it('clicks searchbar and searches for Britney', () => {
-       cy.visit('http://localhost:3000')
-       cy.get('[data-testid=searchbar]').click()
-       cy.get('[data-testid=searchbar]').type('Britney')
+    it('tests full user scenario end to end', () => {
+       cy.visit('http://localhost:3000')                                //go to website
+       cy.get('[data-testid=searchbar]').click().type('coldplay')       //click searchbar and type in colplay 
+       cy.wait(1000)                                                    //wait for page to render
+       cy.get('.MuiPaginationItem-page').last().click({force : true})   //Click next page
+       cy.wait(1000)                                                    //wait for render
+       cy.get('a').first().click()                                      //click the first result
+       cy.get('[data-testid=username]').click().type('testuser')        //Click and type testuser
+       cy.get(".MuiRating-visuallyHidden").first().click({force : true})//Click one star
+       cy.get('[data-testid=description]').click().type('bad song')     //Click on description andf type "bad song"
+       cy.get('[data-testid="submit"]').click()                         //Click on submit review
+       cy.get('[data-testid=backtosearch]').click()                     //Click back to songsearch  
+       cy.get('[data-testid=clearbutton]').click()                      //Click clear
+       cy.get('[data-testid=selectYear]').parent().click()              //Click select and choose 1999
+       .get('ul > li[data-value="1999"]').click();
+       cy.get('[data-testid=selectOrder]').parent().click()             //Click order er choose oldest first
+       .get('ul > li[data-value="0"]').click();
     })
 
-    after('clears searchbar', () => {
-        cy.get('[data-testid=searchbar]').clear()
-    })
-
-    
 })
