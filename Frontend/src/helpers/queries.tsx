@@ -61,4 +61,3 @@ export const GET_SEARCH = gql`
     }
 `;
 
-export default {};

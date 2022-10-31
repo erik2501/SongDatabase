@@ -7,11 +7,11 @@ import "@testing-library/jest-dom";
 import { useEffect } from 'react';
 import { searchWordAtom, yearAtom, orderAtom } from '../../shared/globalState';
 
-const RecoilObserver = ({node, onChange} : {node : any, onChange : any}) => {
+const RecoilObserver = ({ node, onChange }: { node: any, onChange: any }) => {
     const value = useRecoilValue(node);
     useEffect(() => onChange(value), [onChange, value]);
     return null;
-  };
+};
 
 afterEach(cleanup);
 
@@ -33,7 +33,7 @@ describe('testing the searchbar', () => {
         )
         const input = screen.getByRole('textbox', {
             name: /search for song or artist/i
-          })
+        })
         act(() => {
             userEvent.type(input, "Britney Spears");
         })
@@ -50,12 +50,12 @@ describe('testing the searchbar', () => {
         )
         screen.getByRole('textbox', {
             name: /search for song or artist/i
-          })
+        })
 
         fireEvent.change(screen.getByRole('textbox', {
             name: /search for song or artist/i
-          }), {target: {value: 'Britney Spears'}});
-        
+        }), { target: { value: 'Britney Spears' } });
+
         screen.findAllByText(/britney Spears/i)
 
         expect(onChange).toHaveBeenCalledTimes(2);
@@ -73,7 +73,7 @@ describe('testing the searchbar', () => {
         )
 
         act(() => {
-            screen.getByRole('button', {  name: /year all years/i}).click()
+            screen.getByRole('button', { name: /year all years/i }).click()
         })
 
         expect(onChange).toHaveBeenCalledTimes(1);
@@ -89,7 +89,7 @@ describe('testing the searchbar', () => {
         )
 
         act(() => {
-            screen.getByRole('button', {  name: /order newest first/i}).click()
+            screen.getByRole('button', { name: /order newest first/i }).click()
         })
 
         expect(onChange).toHaveBeenCalledTimes(1);
@@ -104,7 +104,7 @@ describe('testing the searchbar', () => {
 
         const input = screen.getByRole('textbox', {
             name: /search for song or artist/i
-          })
+        })
         act(() => {
             userEvent.type(input, "Britney Spears");
         })
