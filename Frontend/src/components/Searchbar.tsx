@@ -18,8 +18,7 @@ const Searchbar = () => {
     const [year, setYear] = useRecoilState(yearAtom);
     const [order, setOrder] = useRecoilState(orderAtom);
 
-    // const { error, data } = useQuery(GET_DISTINCT_YEARS);
-
+    const { data } = useQuery(GET_DISTINCT_YEARS);
 
     const handleSearch = (value: string) => {
         setSearchWord(value);
@@ -66,29 +65,9 @@ const Searchbar = () => {
                     data-testid="selectYear"
                 >
                     <MenuItem value={0}>All years</MenuItem>
-                    <MenuItem value={1998}>1998</MenuItem>
-                    <MenuItem value={1999}>1999</MenuItem>
-                    <MenuItem value={2000}>2000</MenuItem>
-                    <MenuItem value={2001}>2001</MenuItem>
-                    <MenuItem value={2002}>2002</MenuItem>
-                    <MenuItem value={2003}>2003</MenuItem>
-                    <MenuItem value={2004}>2004</MenuItem>
-                    <MenuItem value={2005}>2005</MenuItem>
-                    <MenuItem value={2006}>2006</MenuItem>
-                    <MenuItem value={2007}>2007</MenuItem>
-                    <MenuItem value={2008}>2008</MenuItem>
-                    <MenuItem value={2009}>2009</MenuItem>
-                    <MenuItem value={2010}>2010</MenuItem>
-                    <MenuItem value={2011}>2011</MenuItem>
-                    <MenuItem value={2012}>2012</MenuItem>
-                    <MenuItem value={2013}>2013</MenuItem>
-                    <MenuItem value={2014}>2014</MenuItem>
-                    <MenuItem value={2015}>2015</MenuItem>
-                    <MenuItem value={2016}>2016</MenuItem>
-                    <MenuItem value={2017}>2017</MenuItem>
-                    <MenuItem value={2018}>2018</MenuItem>
-                    <MenuItem value={2019}>2019</MenuItem>
-                    <MenuItem value={2020}>2020</MenuItem>
+                    {data?.getDistinctYears.map( (year: number, index: number) => {
+                        return <MenuItem key={index} value={year}>{year}</MenuItem>
+                    })}
                 </Select>
             </FormControl>
 
