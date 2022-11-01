@@ -5,22 +5,25 @@ import ErrorPage from "../pages/ErrorPage";
 import SongCard from "./SongCard";
 import { debounce } from "../helpers/utils";
 import { useRecoilValue } from 'recoil';
-import { offsetAtom, yearAtom, searchWordAtom, orderAtom } from '../shared/globalState';
+import { offsetAtom, yearAtom, searchWordAtom, orderAtom, pageSizeAtom } from '../shared/globalState';
 import { GET_SEARCH } from "../helpers/queries";
 
 
-const PAGE_SIZE = 10;
-
+// definerer debounce funksjonen vår 
 const debounceFetch = debounce((fetchFunc: () => void) => fetchFunc())
 
-
+// This component displays the songs on the homepage. 
 const SongTable = () => {
 
+    // We are using Recoil State Management to get the filtering variables possibly set in the searchbar 
+    // and the offset set in pagination
     const searchWord = useRecoilValue(searchWordAtom);
     const offset = useRecoilValue(offsetAtom);
     const year = useRecoilValue(yearAtom);
     const order = useRecoilValue(orderAtom);
+    const pageSize = useRecoilValue(pageSizeAtom);
 
+    // this query gets the songs with the users specified filtering
     const [songs, setSongs] = useState<Song[]>([]);
     const [fetchSongs, { loading, error, data }] = useLazyQuery(GET_SEARCH);
 
@@ -30,13 +33,15 @@ const SongTable = () => {
         }
     }, [data])
 
+    // when user changes searchword, this debounce function will fetch filtered songs 500 milliseconds after first input change
     useEffect(() => {
-        debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year, order: order } }))
-    }, [searchWord, year])
+        debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: pageSize, searchWord: searchWord, year: year, order: order } }))
+    }, [searchWord])
 
+    // when the user changes page, order or year the songs are being fetched immediately.
     useEffect(() => {
-        fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year, order: order } })
-    }, [offset, order])
+        fetchSongs({ variables: { skip: offset, amount: pageSize, searchWord: searchWord, year: year, order: order } })
+    }, [offset, order, year])
 
     if (error) return <ErrorPage message={`Error! ${error.message}`} />;
 

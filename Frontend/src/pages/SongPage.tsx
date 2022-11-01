@@ -6,6 +6,7 @@ import ErrorPage from "./ErrorPage";
 
 const SongPage = () => {
 
+	// Using url-parameter to get songID
 	const { songID } = useParams<string>();
 
 	const songIDInt = parseInt(songID ?? "");

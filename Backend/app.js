@@ -15,17 +15,19 @@ const {
     GraphQLObjectType
 } = require("graphql");
 
+// this is where we started the express server
 var app = Express();
 var cors = require("cors");
 const e = require("express");
 app.use(cors());
 
+// this is where we connect to the db with mongoose
 console.log("Starting...")
 mongoose
     .connect("mongodb://it2810-14.idi.ntnu.no:27017/project3")
     .then(() => console.log("Connected to database.."))
     .catch(err => console.error(err));
-
+// these are our two schemas
 const songSchema = new mongoose.Schema({
     songID: Number,
     artistName: String,
@@ -56,11 +58,11 @@ const reviewSchema = new mongoose.Schema({
 
     },
 })
-
+// these are our two models
 const SongModel = mongoose.model("song", songSchema);
 
 const ReviewModel = mongoose.model('review', reviewSchema);
-
+// these are our three grapghQL types
 const SongType = new GraphQLObjectType({
     name: "Song",
     fields: {
@@ -188,7 +190,7 @@ const schema = new GraphQLSchema({
         }
     })
 })
-
+// this is where we specify the url and run the schema on the express server
 app.use("/songs", ExpressGraphQL({
     schema: schema,
     graphiql: true
@@ -198,10 +200,3 @@ app.use("/songs", ExpressGraphQL({
 app.listen(3001, () => {
     console.log("server running at 3001");
 });
-
-// async function run() {
-//     const rev = new ReviewModel({ userName: 'cat', star: 5, reviewDescription: 'bra', song: '6345556c61d7bda047cb5196' })
-//     await rev.save()
-//     console.log(rev)
-// }
-// run()

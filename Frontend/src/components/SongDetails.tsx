@@ -13,7 +13,7 @@ import { GET_SONG_BY_SONGID } from '../helpers/queries';
 
 
 
-
+// this is the component that displays the detailed information about a song. 
 const SongDetails = ({ songID }: { songID: number }) => {
 
     const [song, setSong] = useState<SongAllData>();
