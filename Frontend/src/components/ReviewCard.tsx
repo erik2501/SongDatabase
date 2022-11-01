@@ -1,13 +1,9 @@
 import Card from "@mui/material/Card";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
+import { reviewProp } from "../helpers/types";
 
-interface reviewProp {
-    userName: string,
-    star: number,
-    description: string,
-}
-
+// this card diplays a review with information from the properties sent from the parent node
 export default function ReviewCard(props: reviewProp) {
     return (
         <div>

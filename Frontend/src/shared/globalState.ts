@@ -10,6 +10,11 @@ export const offsetAtom = atom({
     default: 0
 })
 
+export const pageSizeAtom = atom({
+    key: 'pageSize-atom',
+    default: 10
+})
+
 export const yearAtom = atom({
     key: 'year-atom',
     default: 0

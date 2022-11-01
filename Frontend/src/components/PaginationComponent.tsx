@@ -4,26 +4,26 @@ import Stack from '@mui/material/Stack';
 import { useLazyQuery } from '@apollo/client';
 import { debounce } from '../helpers/utils';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
+import { offsetAtom, yearAtom, searchWordAtom, pageSizeAtom } from '../shared/globalState';
 import { GET_COUNT } from '../helpers/queries';
 
-const PAGE_SIZE = 10;
 
 const debounceGetLength = debounce((fetchFunc: () => void) => fetchFunc())
 
 const PaginationComponent = () => {
-
+// these are the variables from the state manager so we can fetch the right data
     const searchWord = useRecoilValue(searchWordAtom);
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const year = useRecoilValue(yearAtom);
+    const pageSize = useRecoilValue(pageSizeAtom);
 
     const [fetchCount, { data }] = useLazyQuery(GET_COUNT)
 
-
-    const maxPages = Math.ceil((data?.songSearchCount ?? 1) / PAGE_SIZE);
+// the number of pages from the number of songs that are to be displayed
+    const maxPages = Math.ceil((data?.songSearchCount ?? 1) / pageSize);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setOffset((value - 1) * PAGE_SIZE)
+        setOffset((value - 1) * pageSize)
     }
 
 
@@ -35,7 +35,7 @@ const PaginationComponent = () => {
 
     return (
         <Stack spacing={2}>
-            <Pagination count={maxPages} page={offset / PAGE_SIZE + 1} onChange={handleChange} variant="outlined" color="primary" />
+            <Pagination count={maxPages} page={offset / pageSize + 1} onChange={handleChange} variant="outlined" color="primary" />
         </Stack>
     )
 }
