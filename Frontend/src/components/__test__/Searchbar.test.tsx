@@ -6,12 +6,29 @@ import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { useEffect } from 'react';
 import { searchWordAtom, yearAtom, orderAtom } from '../../shared/globalState';
+import { GET_DISTINCT_YEARS } from '../../helpers/queries';
+import { MockedProvider } from '@apollo/client/testing';
 
 const RecoilObserver = ({ node, onChange }: { node: any, onChange: any }) => {
     const value = useRecoilValue(node);
     useEffect(() => onChange(value), [onChange, value]);
     return null;
 };
+
+const mocks = [{
+    request: {
+        query: GET_DISTINCT_YEARS,
+        variables: {}
+    },
+    result: {
+        data: {
+            getDistinctYears: [
+                1999, 2000, 2001, 2002, 2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019
+
+            ]
+        }
+    }
+}];
 
 afterEach(cleanup);
 
@@ -20,7 +37,9 @@ describe('testing the searchbar', () => {
     it('render without crashing', () => {
         render(
             <RecoilRoot>
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
     })
@@ -28,7 +47,9 @@ describe('testing the searchbar', () => {
     it('testing input field', () => {
         render(
             <RecoilRoot>
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
         const input = screen.getByRole('textbox', {
@@ -45,7 +66,9 @@ describe('testing the searchbar', () => {
         render(
             <RecoilRoot>
                 <RecoilObserver node={searchWordAtom} onChange={onChange} />
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
         screen.getByRole('textbox', {
@@ -68,7 +91,9 @@ describe('testing the searchbar', () => {
         render(
             <RecoilRoot>
                 <RecoilObserver node={yearAtom} onChange={onChange} />
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
 
@@ -84,7 +109,9 @@ describe('testing the searchbar', () => {
         render(
             <RecoilRoot>
                 <RecoilObserver node={orderAtom} onChange={onChange} />
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
 
@@ -98,7 +125,9 @@ describe('testing the searchbar', () => {
     it('testing clear button', () => {
         render(
             <RecoilRoot>
-                <Searchbar />
+                <MockedProvider mocks={mocks} addTypename={false}>
+                    <Searchbar />
+                </MockedProvider>
             </RecoilRoot>
         )
 
