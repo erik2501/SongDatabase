@@ -11,6 +11,7 @@ import { GET_SEARCH } from "../helpers/queries";
 
 const PAGE_SIZE = 10;
 
+// bruker debounce funksjonen vår 
 const debounceFetch = debounce((fetchFunc: () => void) => fetchFunc())
 
 

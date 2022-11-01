@@ -14,12 +14,15 @@ import { GET_DISTINCT_YEARS } from "../helpers/queries";
 const Searchbar = () => {
 
     const [searchWord, setSearchWord] = useRecoilState(searchWordAtom);
+    // offset er verdien som styrer hvor pagineringen skal starte.
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const [year, setYear] = useRecoilState(yearAtom);
+    // order er variabelen som brukes i spørring for å spesisere sorterings-rekkefølgen man vil ha. -1 tilsvarer baklengs (nyest-eldst), 0 tilsvarer forlengs (eldst-nyest).
     const [order, setOrder] = useRecoilState(orderAtom);
 
     const { data } = useQuery(GET_DISTINCT_YEARS);
 
+    // grunnen til at vi setter offset til 0 i alle disse funksjonene er at da vil pagineringen gå tilbake til første side når søkeresultatet endrer seg
     const handleSearch = (value: string) => {
         setSearchWord(value);
         setOffset(0);
