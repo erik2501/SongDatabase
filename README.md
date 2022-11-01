@@ -12,7 +12,7 @@ Vi har valgt å bruke en stakk som kalles MERN. Stakken består av MongoDB som d
 
 Gruppen har, som nevnt, valgt å bruke MongoDB som database. Databasen består av to collections, songs og reviews. I ettertid har vi reflektert over løsningen og kommet frem til at det heller er ønskelig med en liste med reviews til hver sang fremfor en egen Collection av reviews. Grunnen for dette var vår initielle forståelse av databasestrukturer for å unngå redundans og anomalier. For hver sang henter vi også ut en gjennomsnittlig review-score. Her gjøres det da en graphql-spørring for hver av de ti sangen. Hadde vi endret databasestrukturen slik foreslått ville løsningen vært penere. Vi har dog ikke valgt å gjøre om på dette ettersom vi ikke prioriterte å gjøre om på fungerende løsninger.
 
-I backend mappen i prosjektet, har vi kun en fil, App.js, hvor vi oppretter alle Schemas, Models og types. Her blir også alle GraphQL querysene skrevet i backend og express serveren blir satt opp. Vi kunne sortert ut models, types og schemas men ettersom dette hadde skapt flere mindre filer ønsket vi å holde backend samlet . App.js filen er skrevet i JavaScript ettersom vi etter råd fra stud.ass skulle gjøre om denne til typescript etter den var ferdig. Dette viste seg å være vanskeligere enn først antatt og vi har dermed valgt å fokusere vår tid på mer vitale deler av oppgaven. 
+I backend mappen i prosjektet, har vi kun en fil, App.js, hvor vi oppretter alle Schemas, Models og types. Her blir også alle GraphQL querysene skrevet i backend og express serveren blir satt opp. Vi kunne sortert ut models, types og schemas men ettersom dette hadde skapt flere mindre filer ønsket vi å holde backend samlet. App.js filen er skrevet i JavaScript ettersom vi etter råd fra stud.ass skulle gjøre om denne til typescript etter den var ferdig. Dette viste seg å være vanskeligere enn først antatt og vi har dermed valgt å fokusere vår tid på mer vitale deler av oppgaven. 
 
 ## GitLab
 
@@ -34,11 +34,11 @@ Gruppen har testet siden på en 13 tommer skjerm i Google Chrome, ettersom det i
 
 Gruppen har valgt å bruke React Testing Library og Jest for å lage snapshot-tester og enhetstester, ettersom dette ble anbefalt i forelesning, samt at gruppen hadde erfaring med bibliotekene fra forrige prosjekt. Vi har implementert tre snapshot-tester; en av SongCard, en av ReviewCard og en av ScrollButton. Det er også implementert to enhetstester, en av Searchbar og en av ReviewComponent. Det falt mest naturlig å enhetsteste disse komponentene ettersom det er her brukere har mulighet til å interagere med nettsiden. I Searchbar-testen har vi testet søke-tekstfeltet, dropdown-menyene og clear-knappen. I ReviewComponent har vi testet tekstfeltene Name og Description, samt testing av stjerne-ratingen. Her inkluderte vi også mocking i testingen, for å slippe at testene faktisk skriver reviews til databasen. 
 
-Vi har valgt å bruke Cypress til å gjennomføre end-to-end testing, ettersom det er et oversiktlig bibliotek som hadde god dokumentasjon og gode tutorials på nettet. Reviewene er ikke koblet til en spesifikk bruker og vi valgte dermed å ikke lage en egen database for testing. En konsekvens av dette er at en sang har tilknyttet mange like reviews, men dette re er ikke noe vi ser på som et nevneverdig problem. 
+Vi har valgt å bruke Cypress til å gjennomføre end-to-end testing, ettersom det er et oversiktlig bibliotek som hadde god dokumentasjon og gode tutorials på nettet. Reviewene er ikke koblet til en spesifikk bruker og vi valgte dermed å ikke lage en egen database for testing. En konsekvens av dette er at en sang har tilknyttet mange like reviews, men dette er ikke noe vi ser på som et nevneverdig problem. 
 
 ## Material UI
 
-Material UI er styling biblioteket vi har valgt å bruke i denne oppgaven. Alle på gruppa har jobbet med dette før, og biblioteket inneholder alle komponenter vi trengte på sida, og var dermed det naturlige valget for oss. Valget sørget også for at alle komponentene har lik styling uavhengig av hvem på gruppen som utviklet. Dette sørger for et gjennomgående tema på nettsiden, samt et godt brukergrensesnitt. 
+Material UI er styling-biblioteket vi har valgt å bruke i denne oppgaven. Alle på gruppen har jobbet med dette før, og biblioteket inneholder alle komponenter vi trengte på siden, og var dermed det naturlige valget for oss. Valget sørget også for at alle komponentene har lik styling uavhengig av hvem på gruppen som utviklet. Dette sørger for et gjennomgående tema på nettsiden, samt et godt brukergrensesnitt. 
 
 ## Bemerkelser
 
@@ -46,7 +46,7 @@ Material UI er styling biblioteket vi har valgt å bruke i denne oppgaven. Alle 
 
 - Vi har kun valgt å vise de siste 10 reviewene for hver sang. Her kunne vi implementert paginering og vist alle reviewene, men ettersom dette var noe vi allerede har implementert så vi ikke på dette som hensiktsmessig.
 
-- Da vi satte opp databasen vår, var vi ikke klar over at vi kunne bruke mongoDB sin ObjectID, så vi bruker songID som vi vet har unike verdier for alle sanger. Ville brukt ObjectID om vi skulle gjort det på nytt.
+- Da vi satte opp databasen vår, var vi ikke klar over at vi kunne bruke mongoDB sin ObjectID, så vi bruker songID som vi vet har unike verdier for alle sanger. Vi vlle brukt ObjectID om vi skulle gjort det på nytt.
 
 - Dersom bruker skriver et review vil han/hun komme tilbake til homepage uten filtrering ved å trykke på  “return to songsearch”  ettersom vi mener dette er mest hensiktsmessig.
 
