@@ -14,12 +14,13 @@ import { GET_DISTINCT_YEARS } from "../helpers/queries";
 const Searchbar = () => {
 
     const [searchWord, setSearchWord] = useRecoilState(searchWordAtom);
-    // offset is the value that sets where the pagiantion should start
+    // offset is the value that sets where the pagination should start
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const [year, setYear] = useRecoilState(yearAtom);
     // order is the value that is used in the query to specify the sorting order the user has chosen. -1 is backwards(newest-oldest), 0 is forwards(oldest-newest)
     const [order, setOrder] = useRecoilState(orderAtom);
 
+    // query to get all distinct years songs were made in database to our dropdownlist
     const { data } = useQuery(GET_DISTINCT_YEARS);
 
     // the reason we set the offset to be 0 in all these functions, is because then the pagination will go back to the first page when the search is changed

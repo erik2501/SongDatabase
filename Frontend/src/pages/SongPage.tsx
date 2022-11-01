@@ -3,10 +3,10 @@ import SongDetails from '../components/SongDetails';
 import { useNavigate } from 'react-router-dom';
 import ErrorPage from "./ErrorPage";
 
-// this page displays all the specific information about a song
+
 const SongPage = () => {
 
-	// Bruker url-parameteret til å hente songID
+	// Using url-parameter to get songID
 	const { songID } = useParams<string>();
 
 	const songIDInt = parseInt(songID ?? "");

@@ -16,7 +16,8 @@ const SongCard = ({ song }: { song: Song }) => {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down(730))
-// this is to be able to move on the page with the tad, and enter button
+
+    // this is to be able to move on the page with the tab, and open songPages with enter on the keyboard
     const onKeyUp = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
         if (e.key === "Enter") nav('/song/' + song.songID);
     }

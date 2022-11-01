@@ -4,8 +4,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_REVIEW } from '../helpers/queries';
 
 
-// this component is for a user to write a review to a specific song, 
-// where the props is the specific song the component is connected to
+// This component is a form users can fill in to add a review to the song viewed in SongPage
 export default function ReviewComponent({ songID }: { songID: number }) {
 
     // these are the variables for each field for the review, and the message is an error message
@@ -16,7 +15,8 @@ export default function ReviewComponent({ songID }: { songID: number }) {
 
     // this is the mutation that adds a review to the db
     const [createReview, { loading }] = useMutation(CREATE_REVIEW);
-// handles the submit button, by setting the variables if they are filled out, and displaying message if not
+
+    // handles submit-button clicks, by creating a review if the needed variables are filled out, and displaying message if not
     const handleSubmit = () => {
         if (userName && star) {
             setMessage("")
