@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-
+// if the user changes the url to a url that is wrong, this page is displayed.
 const ErrorPage = ({message}: {message: string}) => {
 
     const nav = useNavigate();

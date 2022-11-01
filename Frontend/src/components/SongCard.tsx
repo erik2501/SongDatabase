@@ -7,7 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 import { GET_AVG_REVIEW_SCORE } from '../helpers/queries';
 
 
-
+// this component shows a song on the homepage, it fetches the average score of a song to display this value
 const SongCard = ({ song }: { song: Song }) => {
 
     const { data } = useQuery(GET_AVG_REVIEW_SCORE, { variables: { songID: song.songID } })
@@ -16,7 +16,7 @@ const SongCard = ({ song }: { song: Song }) => {
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down(730))
-
+// this is to be able to move on the page with the tad, and enter button
     const onKeyUp = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
         if (e.key === "Enter") nav('/song/' + song.songID);
     }

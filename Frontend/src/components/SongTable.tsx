@@ -14,14 +14,17 @@ const PAGE_SIZE = 10;
 // bruker debounce funksjonen vår 
 const debounceFetch = debounce((fetchFunc: () => void) => fetchFunc())
 
-
+// This component displays the songs on the homepage
+// it uses Recoil State Management to get the variables to fetch the right songs with pagination and the searchbar
 const SongTable = () => {
 
+    // here we get the values from the state manager, both for the pagiantion and from the searchbar
     const searchWord = useRecoilValue(searchWordAtom);
     const offset = useRecoilValue(offsetAtom);
     const year = useRecoilValue(yearAtom);
     const order = useRecoilValue(orderAtom);
 
+    // this query gets the song with a specific search word
     const [songs, setSongs] = useState<Song[]>([]);
     const [fetchSongs, { loading, error, data }] = useLazyQuery(GET_SEARCH);
 
@@ -30,7 +33,7 @@ const SongTable = () => {
             setSongs(data.songSearch);
         }
     }, [data])
-
+// gets song with the correct variables
     useEffect(() => {
         debounceFetch(() => fetchSongs({ variables: { skip: offset, amount: PAGE_SIZE, searchWord: searchWord, year: year, order: order } }))
     }, [searchWord, year])

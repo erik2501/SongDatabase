@@ -3,7 +3,7 @@ import RootLayout from "./RootLayout";
 import HomePage from "../pages/HomePage";
 import SongPage from './SongPage';
 import ErrorPage from "./ErrorPage";
-
+// this page routes all the component to the right url
 const RoutesComponent = () => (
 	<ReactRouterRoutes>
 		<Route path="/" element={<RootLayout />}>

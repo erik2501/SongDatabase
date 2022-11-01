@@ -1,6 +1,6 @@
 import {FaArrowCircleUp} from 'react-icons/fa';
 
-
+// this is a button to scroll to the top, it is part of the universal design
 const ScrollButton = () => {
 
     const handleScrollUp = () => {
