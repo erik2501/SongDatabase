@@ -1,18 +1,28 @@
 {
   "name": "3_project",
+  "homepage": "/project3",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
+    "@apollo/client": "^3.7.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.10",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.65",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-test-renderer": "^18.2.0",
+    "recoil": "^0.7.6",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -39,5 +49,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "cypress": "^10.11.0",
+    "jest-dom": "^4.0.0",
+    "react-testing-library": "^8.0.1",
+    "@types/react-test-renderer": "^18.0.0"
   }
 }

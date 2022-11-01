@@ -1,0 +1,178 @@
+.App {
+  text-align: center;
+  color: gray;
+}
+
+header {
+  background-color: rgb(194, 238, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0px;
+}
+
+
+
+button {
+  border: none;
+  border-radius: 10px;
+  background-color: #62b3ff;
+  padding: 10px;
+  font-size: medium;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.1;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.input[type=text] {
+  width: 200px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  /* background-color: white;
+  background-image: url('./images/search-icon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat; */
+  padding: 20px 20px 20px 20px;
+  margin: 10px;
+  transition: width 0.4s ease-in-out;
+  border-radius: 10px;
+}
+
+select {
+  appearance: none;
+  width: 100px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(227, 227, 227);
+  color: gray;
+  padding: 20px 20px 20px 20px;
+  outline: none;
+  font-size: medium;
+}
+
+.smallh2{
+  display: block;
+  font-size:0.8em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.textbox {
+  padding-left: 20px;
+  text-align: left;
+  font-size: larger;
+  color: gray;
+  width: 65%;
+}
+
+.song-info {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.songCard {
+  height: 100px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 25px;
+  background-color: rgb(224, 224, 224);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.songCardContainer {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.songCard:hover {
+  opacity: 0.4;
+}
+
+.flexColCenterCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.page-manager {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  justify-content: space-evenly;
+}
+
+.searchbar {
+  margin-bottom: 20px;
+}
+
+.albumcoverImage {
+  height: 100px;
+}
+
+.songDetails {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.imgDetails {
+  height: 300px;
+}
+
+.reviewBox {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  justify-content: space-between;
+}
+
+.reviewList {
+  flex-wrap: wrap;
+  height: 400px;
+  overflow-y: scroll;
+  width:100%;
+}
+
+.button4 {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  height: 50px;
+  font-size: 3rem;
+  z-index: 1;
+  cursor: pointer;
+  color: green;
+}

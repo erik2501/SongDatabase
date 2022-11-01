@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders when passed name and rating and description 1`] = `
+<div>
+  <div
+    className="MuiPaper-root MuiPaper-outlined MuiPaper-rounded MuiCard-root css-1v5z4dq-MuiPaper-root-MuiCard-root"
+    style={
+      Object {
+        "paddingBottom": "15px",
+      }
+    }
+  >
+    <h5>
+      snapshotTestName
+    </h5>
+    <span
+      aria-label="1 Star"
+      className="MuiRating-root MuiRating-sizeMedium MuiRating-readyOnly css-ryrseu-MuiRating-root"
+      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
+      role="img"
+    >
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconFilled css-7qmtgc-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        <span
+          className="MuiRating-icon MuiRating-iconEmpty css-1c99szj-MuiRating-icon"
+        >
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+            data-testid="StarIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </span>
+      </span>
+    </span>
+    <p>
+      bra
+    </p>
+  </div>
+</div>
+`;
+
+exports[`scrollbutton renders 1`] = `
+<svg
+  className="button4"
+  fill="currentColor"
+  height="1em"
+  onClick={[Function]}
+  stroke="currentColor"
+  strokeWidth="0"
+  style={
+    Object {
+      "color": undefined,
+    }
+  }
+  viewBox="0 0 512 512"
+  width="1em"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M8 256C8 119 119 8 256 8s248 111 248 248-111 248-248 248S8 393 8 256zm143.6 28.9l72.4-75.5V392c0 13.3 10.7 24 24 24h16c13.3 0 24-10.7 24-24V209.4l72.4 75.5c9.3 9.7 24.8 9.9 34.3.4l10.9-11c9.4-9.4 9.4-24.6 0-33.9L273 107.7c-9.4-9.4-24.6-9.4-33.9 0L106.3 240.4c-9.4 9.4-9.4 24.6 0 33.9l10.9 11c9.6 9.5 25.1 9.3 34.4-.4z"
+  />
+</svg>
+`;
