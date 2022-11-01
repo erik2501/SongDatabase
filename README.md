@@ -48,7 +48,7 @@ Material UI er styling biblioteket vi har valgt å bruke i denne oppgaven. Alle 
 
 - Da vi satte opp databasen vår, var vi ikke klar over at vi kunne bruke mongoDB sin ObjectID, så vi bruker songID som vi vet har unike verdier for alle sanger. Ville brukt ObjectID om vi skulle gjort det på nytt.
 
--Dersom bruker skriver et review vil han/hun komme tilbake til homepage uten filtrering ved å trykke på  “return to songsearch”  ettersom vi mener dette er mest hensiktsmessig.
+- Dersom bruker skriver et review vil han/hun komme tilbake til homepage uten filtrering ved å trykke på  “return to songsearch”  ettersom vi mener dette er mest hensiktsmessig.
 
 
 
