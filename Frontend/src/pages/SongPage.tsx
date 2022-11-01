@@ -6,16 +6,16 @@ import ErrorPage from "./ErrorPage";
 
 const SongPage = () => {
 
-    const { songID } = useParams<string>();
-	
+	const { songID } = useParams<string>();
+
 	const songIDInt = parseInt(songID ?? "");
-	
+
 	const nav = useNavigate()
 
 	if (isNaN(songIDInt)) {
 		return (
 			<div>
-				<ErrorPage message="It seems the url has been altered. Make sure what comes after '/song/' is a number."/>
+				<ErrorPage message="It seems the url has been altered. Make sure what comes after '/song/' is a number." />
 			</div>
 		)
 	}

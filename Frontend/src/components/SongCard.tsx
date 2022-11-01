@@ -10,7 +10,7 @@ import { GET_AVG_REVIEW_SCORE } from '../helpers/queries';
 
 const SongCard = ({ song }: { song: Song }) => {
 
-    const { loading, data } = useQuery(GET_AVG_REVIEW_SCORE, { variables: { songID: song.songID } })
+    const { data } = useQuery(GET_AVG_REVIEW_SCORE, { variables: { songID: song.songID } })
 
     const nav = useNavigate();
 

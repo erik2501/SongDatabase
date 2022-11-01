@@ -1,16 +1,11 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ErrorPage = ({message}: {message: string}) => {
 
     const nav = useNavigate();
 
-    useEffect(() => {
-        sessionStorage.clear()
-    },[])
-
     const backToHome = () => {
-        nav('')
+        nav('/')
         window.location.reload()
     }
     

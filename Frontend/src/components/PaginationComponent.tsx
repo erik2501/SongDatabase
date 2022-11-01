@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { debounce } from '../helpers/utils';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { offsetAtom, yearAtom, searchWordAtom } from '../shared/globalState';
@@ -9,10 +9,7 @@ import { GET_COUNT } from '../helpers/queries';
 
 const PAGE_SIZE = 10;
 
-
-
 const debounceGetLength = debounce((fetchFunc: () => void) => fetchFunc())
-
 
 const PaginationComponent = () => {
 
@@ -20,7 +17,7 @@ const PaginationComponent = () => {
     const [offset, setOffset] = useRecoilState(offsetAtom);
     const year = useRecoilValue(yearAtom);
 
-    const [fetchCount, { loading, error, data }] = useLazyQuery(GET_COUNT)
+    const [fetchCount, { data }] = useLazyQuery(GET_COUNT)
 
 
     const maxPages = Math.ceil((data?.songSearchCount ?? 1) / PAGE_SIZE);
