@@ -12,7 +12,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
     const [description, setDescription] = useState<string>()
     const [message, setMessage] = useState<string>("");
 
-    const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW);
+    const [createReview, { loading }] = useMutation(CREATE_REVIEW);
 
     const handleSubmit = () => {
         if (userName && star) {

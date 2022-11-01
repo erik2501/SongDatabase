@@ -10,7 +10,7 @@ export const GET_REVIEWS = gql`
             songID
         }
     }
-    `
+`;
 
 export const GET_COUNT = gql`
     query ( $searchWord: String, $year: Int ){
@@ -26,7 +26,8 @@ export const CREATE_REVIEW = gql`
             description
             songID
         }
-    }`
+    }
+`;
 
 export const GET_AVG_REVIEW_SCORE = gql`
     query ( $songID: Int ){
