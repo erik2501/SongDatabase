@@ -23,7 +23,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
             createReview({ variables: { userName: userName, star: star, description: description, songID: songID } });
             setUserName(undefined)
             setStar(undefined)
-            window.location.reload()
+            // window.location.reload()
         } else {
             setMessage('Fill inn name and stars')
         }
