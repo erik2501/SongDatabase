@@ -10,7 +10,7 @@ export default function ReviewComponent({ songID }: { songID: number }) {
     // these are the variables for each field for the review, and the message is an error message
     const [star, setStar] = useState<number | null>()
     const [userName, setUserName] = useState<string>()
-    const [description, setDescription] = useState<string>()
+    const [description, setDescription] = useState<string>('')
     const [message, setMessage] = useState<string>("");
 
     // this is the mutation that adds a review to the db
